@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio professionnel de Théo Andre, étudiant en BTS SIO option SISR." />
+  <title>Théo Andre — Portfolio BTS SIO SISR</title>
+  <style>
+    :root {
+      --bg: #090712;
+      --bg2: #151026;
+      --card: rgba(255,255,255,.075);
+      --card2: rgba(255,255,255,.12);
+      --border: rgba(255,255,255,.16);
+      --text: #fff7ed;
+      --muted: #d6c9ef;
+      --muted2: #9ca3af;
+      --a: #ff4ecd;
+      --b: #fb923c;
+      --c: #fde047;
+      --ok: #34d399;
+      --shadow: rgba(255,78,205,.25);
+      color-scheme: dark;
+    }
+    [data-theme="matrix"] { --bg:#020806; --bg2:#06130d; --text:#f7fee7; --muted:#d9f99d; --muted2:#86efac; --a:#39ff14; --b:#a3e635; --c:#22c55e; --shadow:rgba(57,255,20,.24); }
+    [data-theme="pro"] { --bg:#f8fafc; --bg2:#eef2ff; --card:rgba(255,255,255,.82); --card2:rgba(255,255,255,.95); --border:rgba(15,23,42,.14); --text:#0f172a; --muted:#334155; --muted2:#64748b; --a:#7c3aed; --b:#f97316; --c:#0ea5e9; --shadow:rgba(124,58,237,.16); color-scheme: light; }
+    [data-theme="red"] { --bg:#050506; --bg2:#180909; --text:#fff1f2; --muted:#fecdd3; --muted2:#fda4af; --a:#ef4444; --b:#f97316; --c:#facc15; --shadow:rgba(239,68,68,.25); }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 15% 5%, color-mix(in srgb, var(--a) 24%, transparent), transparent 32rem),
+        radial-gradient(circle at 90% 20%, color-mix(in srgb, var(--b) 20%, transparent), transparent 34rem),
+        linear-gradient(135deg, var(--bg), var(--bg2));
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+      background-image: linear-gradient(color-mix(in srgb, var(--a) 10%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--a) 10%, transparent) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(circle at top, black, transparent 78%);
+      opacity: .45;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background: radial-gradient(circle at 50% 120%, color-mix(in srgb, var(--c) 12%, transparent), transparent 30rem);
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    .progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; z-index: 80; background: linear-gradient(90deg,var(--a),var(--b),var(--c)); box-shadow: 0 0 22px var(--a); }
+    .nav {
+      position: sticky; top: 0; z-index: 60;
+      border-bottom: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg) 76%, transparent);
+      backdrop-filter: blur(18px);
+    }
+    .nav-inner { max-width: 1180px; margin: 0 auto; padding: .8rem 1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .brand { display: flex; align-items: center; gap: .75rem; font-weight: 950; }
+    .brand-logo { display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 1rem; color: var(--bg); background: linear-gradient(135deg,var(--a),var(--b),var(--c)); box-shadow: 0 18px 55px var(--shadow); }
+    .nav-links { display: flex; gap: .35rem; align-items: center; border: 1px solid var(--border); background: var(--card); border-radius: 999px; padding: .25rem; }
+    .nav-links a { padding: .62rem .85rem; border-radius: 999px; color: var(--muted); font-size: .88rem; font-weight: 800; transition: .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--bg); background: linear-gradient(135deg,var(--a),var(--b)); transform: translateY(-1px); }
+    .theme-btn, .ghost-btn, .primary-btn, .download-btn, .preview-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      border: 1px solid var(--border); border-radius: 1rem;
+      padding: .78rem 1rem; color: var(--text); background: var(--card); cursor: pointer; font-weight: 900; transition: .2s;
+    }
+    .primary-btn { color: var(--bg); background: linear-gradient(135deg,var(--a),var(--b),var(--c)); border-color: transparent; box-shadow: 0 22px 62px var(--shadow); }
+    .theme-btn:hover, .ghost-btn:hover, .download-btn:hover, .preview-btn:hover, .primary-btn:hover { transform: translateY(-2px); box-shadow: 0 18px 50px var(--shadow); }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 1rem; }
+    section { padding: 5rem 0; }
+    .hero { min-height: calc(100vh - 76px); display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 2.4rem; }
+    .eyebrow { display: inline-flex; align-items: center; gap: .45rem; padding: .48rem .8rem; border: 1px solid var(--border); border-radius: 999px; background: color-mix(in srgb, var(--a) 12%, transparent); color: var(--a); font-weight: 900; font-size: .86rem; }
+    h1, h2, h3 { margin: 0; letter-spacing: -.04em; }
+    h1 { font-size: clamp(3rem, 7vw, 6.7rem); line-height: .9; font-weight: 1000; text-wrap: balance; }
+    h2 { font-size: clamp(2rem, 4vw, 4rem); line-height: 1; font-weight: 1000; text-wrap: balance; }
+    h3 { font-size: 1.35rem; font-weight: 950; }
+    p { color: var(--muted); line-height: 1.75; }
+    .neon { background: linear-gradient(90deg,var(--a),var(--b),var(--c),var(--a)); background-size: 260% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gradient 7s ease-in-out infinite; filter: drop-shadow(0 0 22px var(--shadow)); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.6rem; }
+    .chips { display:flex; flex-wrap: wrap; gap:.55rem; margin-top: 1.2rem; }
+    .chip, .tag { display:inline-flex; align-items:center; border-radius:999px; padding:.34rem .68rem; font-size:.78rem; font-weight:900; border:1px solid var(--border); background:var(--card); color:var(--muted); }
+    .tag { --x: var(--a); --y: var(--b); color: color-mix(in srgb, var(--x) 78%, white); border-color: color-mix(in srgb, var(--x) 36%, var(--border)); background: linear-gradient(135deg, color-mix(in srgb, var(--x) 18%, transparent), color-mix(in srgb, var(--y) 14%, transparent)); }
+    .panel { position: relative; background: linear-gradient(135deg,var(--card),color-mix(in srgb, var(--card2) 72%, transparent)); border:1px solid var(--border); border-radius: 2rem; box-shadow: 0 24px 80px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.06); backdrop-filter: blur(16px); overflow: hidden; }
+    .panel-pad { padding: 1.35rem; }
+    .hero-card { min-height: 490px; padding: 1.2rem; display: grid; gap: 1rem; }
+    .profile-card { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem; border-radius: 1.55rem; background: var(--card); border:1px solid var(--border); }
+    .avatar { display:grid; place-items:center; width: 5.2rem; height: 5.2rem; border-radius: 1.45rem; color: var(--bg); background: linear-gradient(135deg,var(--a),var(--b),var(--c)); font-size: 2rem; font-weight: 1000; box-shadow: 0 20px 60px var(--shadow); }
+    .terminal { padding:1.1rem; background: color-mix(in srgb, var(--bg) 80%, black); border:1px solid var(--border); border-radius:1.5rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:.88rem; }
+    .terminal-top { display:flex; gap:.4rem; margin-bottom:.9rem; }
+    .dot { width:.75rem; height:.75rem; border-radius:50%; background:var(--a); }
+    .dot:nth-child(2){background:var(--b)} .dot:nth-child(3){background:var(--ok)}
+    .cmd { color: var(--a); }
+    .stats { display:grid; grid-template-columns: repeat(4,1fr); gap:1rem; margin-top: -2rem; }
+    .stat { padding:1.2rem; }
+    .stat strong { display:block; font-size:2.1rem; }
+    .section-head { max-width: 760px; margin-bottom: 2rem; }
+    .grid { display:grid; gap:1.2rem; }
+    .grid-3 { grid-template-columns: repeat(3,1fr); }
+    .grid-2 { grid-template-columns: repeat(2,1fr); }
+    .card { padding:1.2rem; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+    .card:hover { transform: translateY(-5px); border-color: color-mix(in srgb, var(--a) 48%, var(--border)); box-shadow: 0 28px 82px var(--shadow); }
+    .project-top { height: 170px; border-radius: 1.4rem; border:1px solid var(--border); background: radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--a) 40%, transparent), transparent 35%), linear-gradient(135deg, color-mix(in srgb, var(--a) 26%, transparent), color-mix(in srgb, var(--b) 18%, transparent)); display:flex; align-items:center; justify-content:center; margin-bottom:1rem; overflow:hidden; }
+    .network-mini { position:relative; width: 180px; height: 110px; }
+    .node { position:absolute; width:48px; height:48px; border-radius: 1rem; display:grid; place-items:center; background:linear-gradient(135deg,var(--a),var(--b)); color:var(--bg); font-weight:1000; box-shadow: 0 0 38px var(--shadow); }
+    .node.a{left:0; top:32px}.node.b{right:0; top:0}.node.c{left:68px; bottom:0}
+    .line { position:absolute; height:2px; background:var(--a); opacity:.5; transform-origin:left; box-shadow:0 0 12px var(--a); }
+    .line.ab{width:110px; left:40px; top:50px; transform:rotate(-18deg)} .line.bc{width:92px; right:32px; top:48px; transform:rotate(112deg)}
+    .timeline { position:relative; display:grid; gap:1rem; }
+    .timeline::before { content:""; position:absolute; left:1.05rem; top:.3rem; bottom:.3rem; width:2px; background: linear-gradient(var(--a),var(--b),transparent); }
+    .time-item { position:relative; padding-left:3rem; }
+    .time-item::before { content:""; position:absolute; left:.68rem; top:.6rem; width:.8rem; height:.8rem; border-radius:50%; background:var(--a); box-shadow:0 0 28px var(--a); }
+    .skills { display:grid; gap:.8rem; }
+    .skill-row { display:grid; gap:.35rem; }
+    .skill-head { display:flex; align-items:center; justify-content:space-between; font-weight:900; }
+    .bar { height: .75rem; background: color-mix(in srgb, var(--muted2) 20%, transparent); border-radius:999px; overflow:hidden; }
+    .bar span { display:block; height:100%; width: var(--v); background: linear-gradient(90deg,var(--a),var(--b),var(--c)); border-radius:999px; }
+    .filters { display:flex; flex-wrap:wrap; gap:.6rem; margin-bottom:1.2rem; }
+    .filter { border:1px solid var(--border); background:var(--card); color:var(--muted); padding:.58rem .85rem; border-radius:999px; cursor:pointer; font-weight:900; }
+    .filter.active { color:var(--bg); background: linear-gradient(135deg,var(--a),var(--b)); }
+    .doc-layout { display:grid; grid-template-columns: .92fr 1.08fr; gap:1.2rem; align-items:start; }
+    .doc-list { display:grid; gap:.75rem; }
+    .doc-card { width:100%; text-align:left; cursor:pointer; }
+    .doc-card.active { border-color: color-mix(in srgb, var(--a) 65%, var(--border)); box-shadow: 0 20px 70px var(--shadow); }
+    .doc-actions { display:flex; flex-wrap:wrap; gap:.65rem; margin-top:1rem; }
+    .viewer { min-height: 660px; position: sticky; top: 92px; }
+    .viewer-frame { margin-top:1rem; height: 560px; border-radius:1.3rem; overflow:hidden; border:1px solid var(--border); background: color-mix(in srgb, var(--bg) 70%, black); display:grid; place-items:center; }
+    .viewer-frame iframe, .viewer-frame img { width:100%; height:100%; border:0; object-fit:contain; background:white; }
+    .viewer-empty { max-width: 420px; text-align:center; padding:2rem; color:var(--muted); }
+    .contact-box { display:grid; grid-template-columns: 1fr 1fr; gap:1.2rem; }
+    .mobile-menu { display:none; }
+    .theme-panel { position:fixed; right:1rem; top:5.2rem; z-index:70; width:min(360px, calc(100vw - 2rem)); padding:1rem; display:none; }
+    .theme-panel.open { display:block; }
+    .theme-option { width:100%; display:flex; align-items:center; gap:.8rem; margin-top:.6rem; padding:.75rem; border-radius:1rem; border:1px solid var(--border); background:var(--card); color:var(--text); cursor:pointer; font-weight:900; }
+    .theme-preview { width:3rem; height:2.4rem; border-radius:.8rem; border:1px solid var(--border); }
+    .reveal { opacity: 0; transform: translateY(18px); transition: .55s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    footer { padding: 2.8rem 0; border-top:1px solid var(--border); background: color-mix(in srgb, var(--bg) 72%, transparent); }
+    @keyframes gradient { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+    @media (max-width: 980px) {
+      .hero, .doc-layout, .contact-box { grid-template-columns: 1fr; }
+      .stats, .grid-3, .grid-2 { grid-template-columns: 1fr 1fr; }
+      .viewer { position:relative; top:0; }
+      .nav-links { display:none; }
+      .mobile-menu { display:inline-flex; }
+      .nav.open .nav-links { display:flex; position:absolute; left:1rem; right:1rem; top:4.6rem; flex-direction:column; align-items:stretch; border-radius:1.4rem; padding:.6rem; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(18px); }
+    }
+    @media (max-width: 620px) {
+      section { padding: 3.5rem 0; }
+      .hero { padding-top: 2rem; }
+      .stats, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+      .profile-card { align-items:flex-start; flex-direction:column; }
+      .viewer-frame { height: 430px; }
+      .nav-inner { padding-inline:.75rem; }
+    }
+  </style>
+</head>
+<body data-theme="neon">
+  <div class="progress" id="progress"></div>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#accueil" class="brand">
+        <span class="brand-logo">TA</span>
+        <span><span style="display:block">Théo Andre</span><small style="color:var(--muted2)">BTS SIO SISR · Lite</small></span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#accueil">Accueil</a>
+        <a href="#projets">Projets</a>
+        <a href="#ressources">Ressources</a>
+        <a href="#competences">Compétences</a>
+        <a href="#parcours">Parcours</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div style="display:flex;gap:.55rem;align-items:center">
+        <button class="theme-btn" id="themeToggle">🎨 Thèmes</button>
+        <button class="theme-btn mobile-menu" id="menuBtn">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <aside class="theme-panel panel" id="themePanel">
+    <h3>Ambiance</h3>
+    <p style="margin-top:.2rem">Version statique légère, sans npm ni build.</p>
+    <button class="theme-option" data-theme-choice="neon"><span class="theme-preview" style="background:linear-gradient(135deg,#ff4ecd,#fb923c)"></span> Neon inferno</button>
+    <button class="theme-option" data-theme-choice="matrix"><span class="theme-preview" style="background:linear-gradient(135deg,#020806,#39ff14)"></span> Matrix</button>
+    <button class="theme-option" data-theme-choice="red"><span class="theme-preview" style="background:linear-gradient(135deg,#050506,#ef4444)"></span> Red team</button>
+    <button class="theme-option" data-theme-choice="pro"><span class="theme-preview" style="background:linear-gradient(135deg,#f8fafc,#7c3aed)"></span> Pro light</button>
+  </aside>
+
+  <main>
+    <section id="accueil" class="container hero">
+      <div class="reveal">
+        <span class="eyebrow">⚡ Portfolio BTS SIO option SISR</span>
+        <h1 style="margin-top:1rem">Théo Andre <span class="neon" style="display:block">Systèmes, réseaux & cybersécurité.</span></h1>
+        <p style="font-size:1.12rem;max-width:720px">Étudiant en BTS SIO option SISR, je présente ici mon parcours, mes projets d’infrastructure, mes stages, mes compétences techniques et mes preuves documentaires téléchargeables.</p>
+        <div class="chips">
+          <span class="chip">Administration systèmes</span><span class="chip">Réseaux</span><span class="chip">Support</span><span class="chip">Cybersécurité</span><span class="chip">Documentation</span>
+        </div>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#ressources">Voir les PDF</a>
+          <a class="ghost-btn" href="fichiers/cv-theo-andre-2025.pdf" download>Télécharger le CV</a>
+        </div>
+      </div>
+      <div class="panel hero-card reveal">
+        <div class="profile-card">
+          <div style="display:flex;gap:1rem;align-items:center">
+            <div class="avatar">TA</div>
+            <div>
+              <strong style="font-size:1.4rem">Théo Andre</strong>
+              <p style="margin:.15rem 0 0">Étudiant BTS SIO SISR</p>
+            </div>
+          </div>
+          <span class="tag" style="--x:#34d399;--y:#059669">Disponible stage / alternance</span>
+        </div>
+        <div class="terminal">
+          <div class="terminal-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <p class="cmd">$ whoami</p><p>theo-andre@portfolio-sisr</p>
+          <p class="cmd">$ skills --scan</p><p>linux · windows server · glpi · zabbix · vlan · firewall · support</p>
+          <p class="cmd">$ goal</p><p>Construire une infrastructure fiable, documentée et sécurisée.</p>
+        </div>
+        <div class="grid grid-3">
+          <div class="panel panel-pad"><strong>14</strong><p>ressources intégrées</p></div>
+          <div class="panel panel-pad"><strong>6</strong><p>projets détaillés</p></div>
+          <div class="panel panel-pad"><strong>0</strong><p>npm requis pour publier</p></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container stats">
+      <div class="panel stat reveal"><strong>Lite</strong><span>mode par défaut</span></div>
+      <div class="panel stat reveal"><strong>PDF</strong><span>prévisualisation à la demande</span></div>
+      <div class="panel stat reveal"><strong>Branch</strong><span>compatible GitHub Pages</span></div>
+      <div class="panel stat reveal"><strong>Static</strong><span>HTML/CSS/JS simple</span></div>
+    </div>
+
+    <section id="projets" class="container">
+      <div class="section-head reveal"><span class="eyebrow">🚀 Projets</span><h2 style="margin-top:1rem">Projets réalisés</h2><p>Des projets orientés SISR : support, systèmes, réseaux, supervision, sauvegarde et cybersécurité.</p></div>
+      <div class="grid grid-3" id="projectsGrid"></div>
+    </section>
+
+    <section id="ressources" class="container">
+      <div class="section-head reveal"><span class="eyebrow">📄 Ressources</span><h2 style="margin-top:1rem">Prévisualisation & téléchargement</h2><p>Clique sur une ressource puis sur “Prévisualiser”. Les PDF ne se chargent pas automatiquement pour éviter les lags.</p></div>
+      <div class="filters" id="docFilters"></div>
+      <div class="doc-layout">
+        <div class="doc-list" id="docList"></div>
+        <article class="panel panel-pad viewer" id="viewer">
+          <span class="eyebrow" id="viewerType">Document</span>
+          <h3 id="viewerTitle" style="margin-top:.9rem">Sélectionne une ressource</h3>
+          <p id="viewerDesc">Choisis un PDF, une image ou un fichier Excel dans la liste.</p>
+          <div class="doc-actions">
+            <button class="preview-btn" id="previewBtn">👁️ Prévisualiser</button>
+            <a class="download-btn" id="downloadBtn" href="#" download>⬇️ Télécharger</a>
+          </div>
+          <div class="viewer-frame" id="viewerFrame"><div class="viewer-empty">Aucun aperçu chargé pour l’instant.<br/>Clique sur “Prévisualiser”.</div></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="competences" class="container">
+      <div class="section-head reveal"><span class="eyebrow">🧠 Compétences</span><h2 style="margin-top:1rem">Compétences techniques</h2><p>Niveaux indicatifs, faciles à modifier directement dans le fichier HTML.</p></div>
+      <div class="grid grid-2">
+        <div class="panel panel-pad reveal"><h3>Savoir-faire</h3><div class="skills" id="skillsBox" style="margin-top:1rem"></div></div>
+        <div class="panel panel-pad reveal"><h3>Domaines SISR</h3><div class="chips" style="margin-top:1rem"><span class="tag" style="--x:#38bdf8;--y:#2563eb">Windows Server</span><span class="tag" style="--x:#34d399;--y:#059669">Linux</span><span class="tag" style="--x:#fb7185;--y:#ef4444">Firewall</span><span class="tag" style="--x:#fbbf24;--y:#f97316">Sauvegarde</span><span class="tag" style="--x:#a78bfa;--y:#7c3aed">Active Directory</span><span class="tag" style="--x:#60a5fa;--y:#0284c7">Support GLPI</span></div><p>Cette section montre une vision recruteur : technologies, méthodes, documentation et exploitation.</p></div>
+      </div>
+    </section>
+
+    <section id="parcours" class="container">
+      <div class="section-head reveal"><span class="eyebrow">🎓 Parcours</span><h2 style="margin-top:1rem">Parcours académique</h2><p>Une timeline simple, lisible, sans composant lourd.</p></div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <section id="contact" class="container">
+      <div class="section-head reveal"><span class="eyebrow">📬 Contact</span><h2 style="margin-top:1rem">Me contacter</h2><p>Les liens sont à remplacer par tes vrais comptes si besoin.</p></div>
+      <div class="contact-box">
+        <div class="panel panel-pad reveal"><h3>Théo Andre</h3><p>Étudiant BTS SIO option SISR. Recherche de stage, alternance ou opportunité junior dans l’administration systèmes/réseaux.</p><div class="chips"><a class="chip" href="mailto:theo.andre@email.com">Email</a><a class="chip" href="#">GitHub</a><a class="chip" href="#">LinkedIn</a></div></div>
+        <div class="panel panel-pad reveal"><h3>À personnaliser</h3><p>Remplace l’email, GitHub, LinkedIn, ville, expériences et textes directement dans <code>index.html</code>. Pas besoin de build.</p><a class="primary-btn" href="fichiers/cv-theo-andre-2025.pdf" download>Télécharger mon CV</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+      <div><strong>Théo Andre — Portfolio BTS SIO SISR</strong><p style="margin:.25rem 0 0">Version statique légère pour GitHub Pages “Deploy from a branch”.</p></div>
+      <a class="ghost-btn" href="#accueil">Retour en haut</a>
+    </div>
+  </footer>
+
+  <script>
+    const projects = [
+      {title:'GLPI + inventaire', cat:'Infrastructure', desc:'Gestion de parc, tickets, base de connaissances et procédure support.', tags:['GLPI','Linux','MariaDB','ITIL']},
+      {title:'Active Directory sécurisé', cat:'Systèmes', desc:'OU, groupes, GPO, droits NTFS et automatisation de comptes.', tags:['AD DS','GPO','PowerShell','DNS']},
+      {title:'Supervision Zabbix', cat:'Réseaux', desc:'Hôtes, triggers, alertes, disponibilité et tableaux de bord.', tags:['Zabbix','SNMP','Alerting','SLA']},
+      {title:'pfSense + VLAN', cat:'Cybersécurité', desc:'Segmentation réseau, filtrage inter-VLAN et journalisation.', tags:['pfSense','VLAN','Firewall','NAT']},
+      {title:'Sauvegarde 3-2-1', cat:'Continuité', desc:'Stratégie de sauvegarde, test de restauration et RPO/RTO.', tags:['Backup','RPO','RTO','rsync']},
+      {title:'Portfolio statique', cat:'Web', desc:'Portfolio léger, prévisualisation PDF et déploiement sans npm.', tags:['HTML','CSS','JS','GitHub Pages']}
+    ];
+    const docs = [
+      {title:'CV Théo Andre 2025', type:'CV', file:'fichiers/cv-theo-andre-2025.pdf', kind:'pdf', desc:'CV professionnel à télécharger ou prévisualiser.'},
+      {title:'Annexe E5 — Tableau de synthèse', type:'E5', file:'fichiers/annexe-e5-tableau-synthese.pdf', kind:'pdf', desc:'Version PDF du tableau de synthèse E5.'},
+      {title:'Annexe E5 — Excel', type:'E5', file:'fichiers/annexe-e5-tableau-synthese.xlsx', kind:'xlsx', desc:'Fichier Excel téléchargeable.'},
+      {title:'Attestation stage SIO1', type:'Stage', file:'fichiers/attestation-stage-sio1.pdf', kind:'pdf', desc:'Attestation de stage première période.'},
+      {title:'Attestation stage PDF', type:'Stage', file:'fichiers/attestation-stage.pdf', kind:'pdf', desc:'Attestation de stage en PDF.'},
+      {title:'Attestation stage image', type:'Stage', file:'fichiers/attestation-stage.jpeg', kind:'image', desc:'Attestation en format image.'},
+      {title:'Présentation stage SIO2', type:'Stage', file:'fichiers/presentation-stage-sio2.pdf', kind:'pdf', desc:'Support de présentation de stage.'},
+      {title:'Fiche switch TP9', type:'TP', file:'fichiers/fiche-switch-tp9.pdf', kind:'pdf', desc:'Fiche de configuration switch.'},
+      {title:'FTP sécurisé', type:'TP', file:'fichiers/ftp-securise.pdf', kind:'pdf', desc:'Mise en place d’un service FTP sécurisé.'},
+      {title:'Mission E — Snort', type:'Cybersécurité', file:'fichiers/mission-e-snort-theo-andre.pdf', kind:'pdf', desc:'Mission autour de Snort et de la détection.'},
+      {title:'Procédure complète TP4', type:'TP', file:'fichiers/procedure-complete-tp4.pdf', kind:'pdf', desc:'Procédure technique détaillée.'},
+      {title:'TP2 — AD comptes/groupes', type:'TP', file:'fichiers/tp2-ad-compte-groupe.pdf', kind:'pdf', desc:'Travail Active Directory sur comptes et groupes.'},
+      {title:'TP4 — FTP User MySQL', type:'TP', file:'fichiers/tp4-ftp-user-mysql.pdf', kind:'pdf', desc:'FTP avec utilisateur et base MySQL.'},
+      {title:'Veille informatique', type:'Veille', file:'fichiers/veille-info.pdf', kind:'pdf', desc:'Document de veille technologique.'}
+    ];
+    const skills = [
+      ['Linux',84], ['Windows Server',80], ['Réseaux',82], ['Cybersécurité',74], ['Supervision',76], ['SQL',68], ['Documentation',88], ['Support',82]
+    ];
+    const timeline = [
+      ['2022','Bac & culture numérique','Bases en systèmes numériques, méthode projet et documentation.'],
+      ['2023','Entrée en BTS SIO','Découverte du développement, SQL, réseau, support et cybersécurité.'],
+      ['2024','Spécialisation SISR','Administration Windows Server/Linux, virtualisation, VLAN, services réseau.'],
+      ['2025','Projets & stages','GLPI, AD, Zabbix, procédures support et preuves professionnelles.'],
+      ['2026','Objectif pro','Alternance ou poste junior en administration systèmes et réseaux.']
+    ];
+    const tagColors = ['#38bdf8','#34d399','#fb7185','#fbbf24','#a78bfa','#60a5fa','#f472b6','#f97316'];
+    let selectedDoc = docs[0];
+    let activeType = 'Tous';
+
+    function colorFor(text){ let n=0; for(const c of text) n+=c.charCodeAt(0); const x=tagColors[n%tagColors.length]; const y=tagColors[(n+3)%tagColors.length]; return `--x:${x};--y:${y}`; }
+    function renderProjects(){
+      document.getElementById('projectsGrid').innerHTML = projects.map(p => `
+        <article class="panel card reveal">
+          <div class="project-top"><div class="network-mini"><span class="line ab"></span><span class="line bc"></span><span class="node a">SI</span><span class="node b">FW</span><span class="node c">LOG</span></div></div>
+          <span class="tag" style="${colorFor(p.cat)}">${p.cat}</span><h3 style="margin-top:.8rem">${p.title}</h3><p>${p.desc}</p>
+          <div class="chips">${p.tags.map(t=>`<span class="tag" style="${colorFor(t)}">${t}</span>`).join('')}</div>
+        </article>`).join('');
+    }
+    function renderFilters(){
+      const types = ['Tous', ...new Set(docs.map(d=>d.type))];
+      document.getElementById('docFilters').innerHTML = types.map(t=>`<button class="filter ${activeType===t?'active':''}" data-type="${t}">${t}</button>`).join('');
+      document.querySelectorAll('.filter').forEach(btn=>btn.onclick=()=>{activeType=btn.dataset.type; renderFilters(); renderDocs();});
+    }
+    function renderDocs(){
+      const filtered = activeType==='Tous' ? docs : docs.filter(d=>d.type===activeType);
+      document.getElementById('docList').innerHTML = filtered.map((d,i)=>`
+        <button class="panel card doc-card ${selectedDoc.file===d.file?'active':''}" data-file="${d.file}">
+          <span class="tag" style="${colorFor(d.type)}">${d.type}</span><h3 style="margin-top:.55rem">${d.title}</h3><p>${d.desc}</p>
+          <div class="chips"><span class="chip">${d.kind.toUpperCase()}</span><span class="chip">Préview à la demande</span></div>
+        </button>`).join('');
+      document.querySelectorAll('.doc-card').forEach(btn=>btn.onclick=()=>{ selectedDoc = docs.find(d=>d.file===btn.dataset.file); updateViewer(false); renderDocs(); });
+    }
+    function updateViewer(load){
+      document.getElementById('viewerType').textContent = selectedDoc.type;
+      document.getElementById('viewerTitle').textContent = selectedDoc.title;
+      document.getElementById('viewerDesc').textContent = selectedDoc.desc;
+      document.getElementById('downloadBtn').href = selectedDoc.file;
+      document.getElementById('downloadBtn').setAttribute('download','');
+      const frame = document.getElementById('viewerFrame');
+      if(!load){ frame.innerHTML = '<div class="viewer-empty">Aperçu non chargé pour économiser les ressources.<br/>Clique sur “Prévisualiser”.</div>'; return; }
+      if(selectedDoc.kind==='pdf') frame.innerHTML = `<iframe src="${selectedDoc.file}" title="${selectedDoc.title}"></iframe>`;
+      else if(selectedDoc.kind==='image') frame.innerHTML = `<img src="${selectedDoc.file}" alt="${selectedDoc.title}">`;
+      else frame.innerHTML = '<div class="viewer-empty">Ce fichier ne se prévisualise pas directement ici.<br/>Utilise le bouton Télécharger.</div>';
+    }
+    function renderSkills(){
+      document.getElementById('skillsBox').innerHTML = skills.map(([name,val])=>`<div class="skill-row"><div class="skill-head"><span>${name}</span><span>${val}%</span></div><div class="bar"><span style="--v:${val}%"></span></div></div>`).join('');
+    }
+    function renderTimeline(){
+      document.getElementById('timeline').innerHTML = timeline.map(([year,title,desc])=>`<div class="time-item panel panel-pad reveal"><span class="tag" style="${colorFor(year)}">${year}</span><h3 style="margin-top:.65rem">${title}</h3><p>${desc}</p></div>`).join('');
+    }
+    function reveal(){ document.querySelectorAll('.reveal').forEach(el=>{ if(el.getBoundingClientRect().top < innerHeight - 70) el.classList.add('visible'); }); }
+    function progress(){ const max=document.documentElement.scrollHeight-innerHeight; document.getElementById('progress').style.width=(max?scrollY/max*100:0)+'%'; }
+    function activeNav(){ const links=[...document.querySelectorAll('.nav-links a')]; let current=''; links.forEach(a=>{ const s=document.querySelector(a.getAttribute('href')); if(s && s.offsetTop-120 <= scrollY) current=a.getAttribute('href'); }); links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===current)); }
+
+    document.getElementById('themeToggle').onclick=()=>document.getElementById('themePanel').classList.toggle('open');
+    document.getElementById('menuBtn').onclick=()=>document.getElementById('nav').classList.toggle('open');
+    document.querySelectorAll('[data-theme-choice]').forEach(b=>b.onclick=()=>{ document.body.dataset.theme=b.dataset.themeChoice; localStorage.setItem('theme',b.dataset.themeChoice); });
+    document.getElementById('previewBtn').onclick=()=>updateViewer(true);
+    document.body.dataset.theme = localStorage.getItem('theme') || 'neon';
+    renderProjects(); renderFilters(); renderDocs(); updateViewer(false); renderSkills(); renderTimeline(); reveal(); progress(); activeNav();
+    addEventListener('scroll',()=>{ reveal(); progress(); activeNav(); }, {passive:true});
+  </script>
+</body>
+</html>
