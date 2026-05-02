@@ -7,24 +7,26 @@
   <title>Théo Andre — Portfolio BTS SIO SISR</title>
   <style>
     :root {
-      --bg: #090712;
-      --bg2: #151026;
+      --bg: #08080d;
+      --bg2: #111827;
       --card: rgba(255,255,255,.075);
       --card2: rgba(255,255,255,.12);
       --border: rgba(255,255,255,.16);
-      --text: #fff7ed;
-      --muted: #d6c9ef;
+      --text: #f8fafc;
+      --muted: #d1d5db;
       --muted2: #9ca3af;
-      --a: #ff4ecd;
-      --b: #fb923c;
-      --c: #fde047;
+      --a: #d4af37;
+      --b: #60a5fa;
+      --c: #f97316;
       --ok: #34d399;
-      --shadow: rgba(255,78,205,.25);
+      --shadow: rgba(212,175,55,.20);
       color-scheme: dark;
     }
-    [data-theme="matrix"] { --bg:#020806; --bg2:#06130d; --text:#f7fee7; --muted:#d9f99d; --muted2:#86efac; --a:#39ff14; --b:#a3e635; --c:#22c55e; --shadow:rgba(57,255,20,.24); }
-    [data-theme="pro"] { --bg:#f8fafc; --bg2:#eef2ff; --card:rgba(255,255,255,.82); --card2:rgba(255,255,255,.95); --border:rgba(15,23,42,.14); --text:#0f172a; --muted:#334155; --muted2:#64748b; --a:#7c3aed; --b:#f97316; --c:#0ea5e9; --shadow:rgba(124,58,237,.16); color-scheme: light; }
-    [data-theme="red"] { --bg:#050506; --bg2:#180909; --text:#fff1f2; --muted:#fecdd3; --muted2:#fda4af; --a:#ef4444; --b:#f97316; --c:#facc15; --shadow:rgba(239,68,68,.25); }
+    [data-theme="obsidian"] { --bg:#08080d; --bg2:#111827; --text:#f8fafc; --muted:#d1d5db; --muted2:#9ca3af; --a:#d4af37; --b:#60a5fa; --c:#f97316; --shadow:rgba(212,175,55,.20); }
+    [data-theme="ocean"] { --bg:#031420; --bg2:#082f49; --text:#f0f9ff; --muted:#bae6fd; --muted2:#7dd3fc; --a:#22d3ee; --b:#2563eb; --c:#a5f3fc; --shadow:rgba(34,211,238,.22); }
+    [data-theme="forest"] { --bg:#04130d; --bg2:#052e1a; --text:#f0fdf4; --muted:#bbf7d0; --muted2:#86efac; --a:#34d399; --b:#16a34a; --c:#facc15; --shadow:rgba(52,211,153,.20); }
+    [data-theme="light"] { --bg:#f8fafc; --bg2:#e0f2fe; --card:rgba(255,255,255,.84); --card2:rgba(255,255,255,.96); --border:rgba(15,23,42,.14); --text:#0f172a; --muted:#334155; --muted2:#64748b; --a:#2563eb; --b:#7c3aed; --c:#f97316; --shadow:rgba(37,99,235,.16); color-scheme: light; }
+    [data-theme="redteam"] { --bg:#080506; --bg2:#1f0a0d; --text:#fff1f2; --muted:#fecdd3; --muted2:#fda4af; --a:#dc2626; --b:#f97316; --c:#facc15; --shadow:rgba(220,38,38,.23); }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -92,6 +94,10 @@
     .neon { background: linear-gradient(90deg,var(--a),var(--b),var(--c),var(--a)); background-size: 260% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gradient 7s ease-in-out infinite; filter: drop-shadow(0 0 22px var(--shadow)); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.6rem; }
     .chips { display:flex; flex-wrap: wrap; gap:.55rem; margin-top: 1.2rem; }
+    .local-widget { display:grid; gap:.25rem; }
+    .clock-time { display:block; margin-top:.65rem; font-size: clamp(2rem, 4vw, 3rem); letter-spacing:.06em; line-height:1; }
+    .clock-date { margin:.25rem 0 0; color:var(--muted2); text-transform: capitalize; }
+    .lang-pulse { box-shadow: 0 0 0 3px color-mix(in srgb, var(--a) 16%, transparent); }
     .chip, .tag { display:inline-flex; align-items:center; border-radius:999px; padding:.34rem .68rem; font-size:.78rem; font-weight:900; border:1px solid var(--border); background:var(--card); color:var(--muted); }
     .tag { --x: var(--a); --y: var(--b); color: color-mix(in srgb, var(--x) 78%, white); border-color: color-mix(in srgb, var(--x) 36%, var(--border)); background: linear-gradient(135deg, color-mix(in srgb, var(--x) 18%, transparent), color-mix(in srgb, var(--y) 14%, transparent)); }
     .panel { position: relative; background: linear-gradient(135deg,var(--card),color-mix(in srgb, var(--card2) 72%, transparent)); border:1px solid var(--border); border-radius: 2rem; box-shadow: 0 24px 80px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.06); backdrop-filter: blur(16px); overflow: hidden; }
@@ -123,6 +129,9 @@
     .timeline::before { content:""; position:absolute; left:1.05rem; top:.3rem; bottom:.3rem; width:2px; background: linear-gradient(var(--a),var(--b),transparent); }
     .time-item { position:relative; padding-left:3rem; }
     .time-item::before { content:""; position:absolute; left:.68rem; top:.6rem; width:.8rem; height:.8rem; border-radius:50%; background:var(--a); box-shadow:0 0 28px var(--a); }
+    .time-meta { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.8rem; }
+    .time-meta .chip { background: color-mix(in srgb, var(--a) 12%, transparent); }
+    .time-role { font-weight: 900; color: var(--text); margin-top: .35rem; }
     .skills { display:grid; gap:.8rem; }
     .skill-row { display:grid; gap:.35rem; }
     .skill-head { display:flex; align-items:center; justify-content:space-between; font-weight:900; }
@@ -169,51 +178,53 @@
     }
   </style>
 </head>
-<body data-theme="neon">
+<body data-theme="obsidian">
   <div class="progress" id="progress"></div>
 
   <nav class="nav" id="nav">
     <div class="nav-inner">
       <a href="#accueil" class="brand">
         <span class="brand-logo">TA</span>
-        <span><span style="display:block">Théo Andre</span><small style="color:var(--muted2)">BTS SIO SISR · Lite</small></span>
+        <span><span style="display:block">Théo Andre</span><small style="color:var(--muted2)" data-i18n="brandSub">BTS SIO SISR · Portfolio</small></span>
       </a>
       <div class="nav-links" id="navLinks">
-        <a href="#accueil">Accueil</a>
-        <a href="#projets">Projets</a>
-        <a href="#ressources">Ressources</a>
-        <a href="#competences">Compétences</a>
-        <a href="#parcours">Parcours</a>
-        <a href="#contact">Contact</a>
+        <a href="#accueil" data-i18n="navHome">Accueil</a>
+        <a href="#projets" data-i18n="navProjects">Projets</a>
+        <a href="#ressources" data-i18n="navResources">Ressources</a>
+        <a href="#competences" data-i18n="navSkills">Compétences</a>
+        <a href="#parcours" data-i18n="navJourney">Parcours</a>
+        <a href="#contact" data-i18n="navContact">Contact</a>
       </div>
       <div style="display:flex;gap:.55rem;align-items:center">
-        <button class="theme-btn" id="themeToggle">🎨 Thèmes</button>
+        <button class="theme-btn" id="langToggle" type="button">🌐 FR</button>
+        <button class="theme-btn" id="themeToggle" type="button">🎨 <span data-i18n="themesBtn">Thèmes</span></button>
         <button class="theme-btn mobile-menu" id="menuBtn">☰</button>
       </div>
     </div>
   </nav>
 
   <aside class="theme-panel panel" id="themePanel">
-    <h3>Ambiance</h3>
-    <p style="margin-top:.2rem">Version statique légère, sans npm ni build.</p>
-    <button class="theme-option" data-theme-choice="neon"><span class="theme-preview" style="background:linear-gradient(135deg,#ff4ecd,#fb923c)"></span> Neon inferno</button>
-    <button class="theme-option" data-theme-choice="matrix"><span class="theme-preview" style="background:linear-gradient(135deg,#020806,#39ff14)"></span> Matrix</button>
-    <button class="theme-option" data-theme-choice="red"><span class="theme-preview" style="background:linear-gradient(135deg,#050506,#ef4444)"></span> Red team</button>
-    <button class="theme-option" data-theme-choice="pro"><span class="theme-preview" style="background:linear-gradient(135deg,#f8fafc,#7c3aed)"></span> Pro light</button>
+    <h3 data-i18n="themeTitle">Ambiance</h3>
+    <p style="margin-top:.2rem" data-i18n="themeText">Choisis un rendu plus propre, lisible et fluide.</p>
+    <button class="theme-option" data-theme-choice="obsidian"><span class="theme-preview" style="background:linear-gradient(135deg,#08080d,#d4af37)"></span> Obsidian Gold</button>
+    <button class="theme-option" data-theme-choice="ocean"><span class="theme-preview" style="background:linear-gradient(135deg,#031420,#22d3ee)"></span> Ocean Glass</button>
+    <button class="theme-option" data-theme-choice="forest"><span class="theme-preview" style="background:linear-gradient(135deg,#04130d,#34d399)"></span> Forest Ops</button>
+    <button class="theme-option" data-theme-choice="light"><span class="theme-preview" style="background:linear-gradient(135deg,#f8fafc,#2563eb)"></span> Minimal Light</button>
+    <button class="theme-option" data-theme-choice="redteam"><span class="theme-preview" style="background:linear-gradient(135deg,#080506,#dc2626)"></span> Red Team</button>
   </aside>
 
   <main>
     <section id="accueil" class="container hero">
       <div class="reveal">
-        <span class="eyebrow">⚡ Portfolio BTS SIO option SISR</span>
-        <h1 style="margin-top:1rem">Théo Andre <span class="neon" style="display:block">Systèmes, réseaux & cybersécurité.</span></h1>
-        <p style="font-size:1.12rem;max-width:720px">Étudiant en BTS SIO option SISR, je présente ici mon parcours, mes projets d’infrastructure, mes stages, mes compétences techniques et mes preuves documentaires téléchargeables.</p>
+        <span class="eyebrow" data-i18n="heroEyebrow">⚡ Portfolio BTS SIO option SISR</span>
+        <h1 style="margin-top:1rem">Théo Andre <span class="neon" style="display:block" data-i18n="heroTitle">Systèmes, réseaux & cybersécurité.</span></h1>
+        <p style="font-size:1.12rem;max-width:720px" data-i18n="heroText">Étudiant en BTS SIO option SISR, je présente ici mon parcours, mes projets d’infrastructure, mes stages, mes compétences techniques et mes preuves documentaires téléchargeables.</p>
         <div class="chips">
-          <span class="chip">Administration systèmes</span><span class="chip">Réseaux</span><span class="chip">Support</span><span class="chip">Cybersécurité</span><span class="chip">Documentation</span>
+          <span class="chip" data-i18n="chipSys">Administration systèmes</span><span class="chip" data-i18n="chipNet">Réseaux</span><span class="chip" data-i18n="chipSupport">Support</span><span class="chip" data-i18n="chipCyber">Cybersécurité</span><span class="chip" data-i18n="chipDocs">Documentation</span>
         </div>
         <div class="hero-actions">
-          <a class="primary-btn" href="#ressources">Voir les PDF</a>
-          <a class="ghost-btn" href="fichiers/cv-theo-andre-2025.pdf" download>Télécharger le CV</a>
+          <a class="primary-btn" href="#ressources" data-i18n="seePdfs">Voir les PDF</a>
+          <a class="ghost-btn" href="fichiers/cv-theo-andre-2025.pdf" download data-i18n="downloadCv">Télécharger le CV</a>
         </div>
       </div>
       <div class="panel hero-card reveal">
@@ -222,39 +233,44 @@
             <div class="avatar">TA</div>
             <div>
               <strong style="font-size:1.4rem">Théo Andre</strong>
-              <p style="margin:.15rem 0 0">Étudiant BTS SIO SISR</p>
+              <p style="margin:.15rem 0 0" data-i18n="studentLabel">Étudiant BTS SIO SISR</p>
             </div>
           </div>
-          <span class="tag" style="--x:#34d399;--y:#059669">Disponible stage / alternance</span>
+          <span class="tag" style="--x:#34d399;--y:#059669" data-i18n="availability">Disponible stage / alternance</span>
+        </div>
+        <div class="local-widget panel panel-pad">
+          <span class="eyebrow" data-i18n="localTimeLabel">🕒 Heure locale</span>
+          <strong id="localTime" class="clock-time">--:--:--</strong>
+          <p id="localDate" class="clock-date">Chargement...</p>
         </div>
         <div class="terminal">
           <div class="terminal-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
           <p class="cmd">$ whoami</p><p>theo-andre@portfolio-sisr</p>
           <p class="cmd">$ skills --scan</p><p>linux · windows server · glpi · zabbix · vlan · firewall · support</p>
-          <p class="cmd">$ goal</p><p>Construire une infrastructure fiable, documentée et sécurisée.</p>
+          <p class="cmd">$ goal</p><p data-i18n="terminalGoal">Construire une infrastructure fiable, documentée et sécurisée.</p>
         </div>
         <div class="grid grid-3">
           <div class="panel panel-pad"><strong>14</strong><p>ressources intégrées</p></div>
           <div class="panel panel-pad"><strong>6</strong><p>projets détaillés</p></div>
-          <div class="panel panel-pad"><strong>0</strong><p>npm requis pour publier</p></div>
+          <div class="panel panel-pad"><strong>2</strong><p>périodes de stage valorisées</p></div>
         </div>
       </div>
     </section>
 
     <div class="container stats">
       <div class="panel stat reveal"><strong>Lite</strong><span>mode par défaut</span></div>
-      <div class="panel stat reveal"><strong>PDF</strong><span>prévisualisation à la demande</span></div>
-      <div class="panel stat reveal"><strong>Branch</strong><span>compatible GitHub Pages</span></div>
+      <div class="panel stat reveal"><strong>Direct</strong><span>prévisualisation immédiate</span></div>
+      <div class="panel stat reveal"><strong>2 stages</strong><span>intégrés dans le parcours</span></div>
       <div class="panel stat reveal"><strong>Static</strong><span>HTML/CSS/JS simple</span></div>
     </div>
 
     <section id="projets" class="container">
-      <div class="section-head reveal"><span class="eyebrow">🚀 Projets</span><h2 style="margin-top:1rem">Projets réalisés</h2><p>Des projets orientés SISR : support, systèmes, réseaux, supervision, sauvegarde et cybersécurité.</p></div>
+      <div class="section-head reveal"><span class="eyebrow" data-i18n="projectsEyebrow">🚀 Projets</span><h2 style="margin-top:1rem" data-i18n="projectsTitle">Projets réalisés</h2><p data-i18n="projectsText">Des projets orientés SISR : support, systèmes, réseaux, supervision, sauvegarde et cybersécurité.</p></div>
       <div class="grid grid-3" id="projectsGrid"></div>
     </section>
 
     <section id="ressources" class="container">
-      <div class="section-head reveal"><span class="eyebrow">📄 Ressources</span><h2 style="margin-top:1rem">Prévisualisation & téléchargement</h2><p>Clique sur une ressource puis sur “Prévisualiser”. Les PDF ne se chargent pas automatiquement pour éviter les lags.</p></div>
+      <div class="section-head reveal"><span class="eyebrow" data-i18n="resourcesEyebrow">📄 Ressources</span><h2 style="margin-top:1rem" data-i18n="resourcesTitle">Prévisualisation & téléchargement</h2><p data-i18n="resourcesText">Clique sur une ressource dans la liste : l’aperçu se charge directement à droite. Le bouton de téléchargement reste disponible pour chaque document.</p></div>
       <div class="filters" id="docFilters"></div>
       <div class="doc-layout">
         <div class="doc-list" id="docList"></div>
@@ -263,40 +279,40 @@
           <h3 id="viewerTitle" style="margin-top:.9rem">Sélectionne une ressource</h3>
           <p id="viewerDesc">Choisis un PDF, une image ou un fichier Excel dans la liste.</p>
           <div class="doc-actions">
-            <button class="preview-btn" id="previewBtn">👁️ Prévisualiser</button>
-            <a class="download-btn" id="downloadBtn" href="#" download>⬇️ Télécharger</a>
+            <button class="preview-btn" id="previewBtn">👁️ <span data-i18n="reloadPreview">Recharger l’aperçu</span></button>
+            <a class="download-btn" id="downloadBtn" href="#" download>⬇️ <span data-i18n="downloadBtn">Télécharger</span></a>
           </div>
-          <div class="viewer-frame" id="viewerFrame"><div class="viewer-empty">Aucun aperçu chargé pour l’instant.<br/>Clique sur “Prévisualiser”.</div></div>
+          <div class="viewer-frame" id="viewerFrame"><div class="viewer-empty">Choisis un document dans la liste pour afficher son aperçu ici.</div></div>
         </article>
       </div>
     </section>
 
     <section id="competences" class="container">
-      <div class="section-head reveal"><span class="eyebrow">🧠 Compétences</span><h2 style="margin-top:1rem">Compétences techniques</h2><p>Niveaux indicatifs, faciles à modifier directement dans le fichier HTML.</p></div>
+      <div class="section-head reveal"><span class="eyebrow" data-i18n="skillsEyebrow">🧠 Compétences</span><h2 style="margin-top:1rem" data-i18n="skillsTitle">Compétences techniques</h2><p data-i18n="skillsText">Compétences principales mobilisées pendant la formation, les TP et les stages.</p></div>
       <div class="grid grid-2">
-        <div class="panel panel-pad reveal"><h3>Savoir-faire</h3><div class="skills" id="skillsBox" style="margin-top:1rem"></div></div>
-        <div class="panel panel-pad reveal"><h3>Domaines SISR</h3><div class="chips" style="margin-top:1rem"><span class="tag" style="--x:#38bdf8;--y:#2563eb">Windows Server</span><span class="tag" style="--x:#34d399;--y:#059669">Linux</span><span class="tag" style="--x:#fb7185;--y:#ef4444">Firewall</span><span class="tag" style="--x:#fbbf24;--y:#f97316">Sauvegarde</span><span class="tag" style="--x:#a78bfa;--y:#7c3aed">Active Directory</span><span class="tag" style="--x:#60a5fa;--y:#0284c7">Support GLPI</span></div><p>Cette section montre une vision recruteur : technologies, méthodes, documentation et exploitation.</p></div>
+        <div class="panel panel-pad reveal"><h3 data-i18n="knowHow">Savoir-faire</h3><div class="skills" id="skillsBox" style="margin-top:1rem"></div></div>
+        <div class="panel panel-pad reveal"><h3 data-i18n="domainsTitle">Domaines SISR</h3><div class="chips" style="margin-top:1rem"><span class="tag" style="--x:#38bdf8;--y:#2563eb">Windows Server</span><span class="tag" style="--x:#34d399;--y:#059669">Linux</span><span class="tag" style="--x:#fb7185;--y:#ef4444">Firewall</span><span class="tag" style="--x:#fbbf24;--y:#f97316">Sauvegarde</span><span class="tag" style="--x:#a78bfa;--y:#7c3aed">Active Directory</span><span class="tag" style="--x:#60a5fa;--y:#0284c7">Support GLPI</span></div><p data-i18n="domainsText">Cette section montre une vision recruteur : technologies, méthodes, documentation et exploitation.</p></div>
       </div>
     </section>
 
     <section id="parcours" class="container">
-      <div class="section-head reveal"><span class="eyebrow">🎓 Parcours</span><h2 style="margin-top:1rem">Parcours académique</h2><p>Une timeline simple, lisible, sans composant lourd.</p></div>
+      <div class="section-head reveal"><span class="eyebrow" data-i18n="journeyEyebrow">🎓 Parcours</span><h2 style="margin-top:1rem" data-i18n="journeyTitle">Parcours & expériences</h2><p data-i18n="journeyText">Une timeline claire qui regroupe la progression scolaire, les deux périodes de stage et les compétences développées.</p></div>
       <div class="timeline" id="timeline"></div>
     </section>
 
     <section id="contact" class="container">
-      <div class="section-head reveal"><span class="eyebrow">📬 Contact</span><h2 style="margin-top:1rem">Me contacter</h2><p>Les liens sont à remplacer par tes vrais comptes si besoin.</p></div>
+      <div class="section-head reveal"><span class="eyebrow" data-i18n="contactEyebrow">📬 Contact</span><h2 style="margin-top:1rem" data-i18n="contactTitle">Me contacter</h2><p data-i18n="contactText">Un espace simple pour accéder rapidement au CV et aux liens professionnels.</p></div>
       <div class="contact-box">
-        <div class="panel panel-pad reveal"><h3>Théo Andre</h3><p>Étudiant BTS SIO option SISR. Recherche de stage, alternance ou opportunité junior dans l’administration systèmes/réseaux.</p><div class="chips"><a class="chip" href="mailto:theo.andre@email.com">Email</a><a class="chip" href="#">GitHub</a><a class="chip" href="#">LinkedIn</a></div></div>
-        <div class="panel panel-pad reveal"><h3>À personnaliser</h3><p>Remplace l’email, GitHub, LinkedIn, ville, expériences et textes directement dans <code>index.html</code>. Pas besoin de build.</p><a class="primary-btn" href="fichiers/cv-theo-andre-2025.pdf" download>Télécharger mon CV</a></div>
+        <div class="panel panel-pad reveal"><h3>Théo Andre</h3><p data-i18n="contactBio">Étudiant BTS SIO option SISR. Recherche de stage, alternance ou opportunité junior dans l’administration systèmes/réseaux.</p><div class="chips"><a class="chip" href="mailto:theo.andre@email.com">Email</a><a class="chip" href="#">GitHub</a><a class="chip" href="#">LinkedIn</a></div></div>
+        <div class="panel panel-pad reveal"><h3 data-i18n="professionalDocs">Documents professionnels</h3><p data-i18n="professionalDocsText">CV, attestations, annexes et supports techniques sont disponibles dans la section Ressources.</p><a class="primary-btn" href="fichiers/cv-theo-andre-2025.pdf" download data-i18n="downloadMyCv">Télécharger mon CV</a></div>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="container" style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap">
-      <div><strong>Théo Andre — Portfolio BTS SIO SISR</strong><p style="margin:.25rem 0 0">Version statique légère pour GitHub Pages “Deploy from a branch”.</p></div>
-      <a class="ghost-btn" href="#accueil">Retour en haut</a>
+      <div><strong>Théo Andre — Portfolio BTS SIO SISR</strong><p style="margin:.25rem 0 0" data-i18n="footerText">Portfolio statique, rapide et compatible GitHub Pages.</p></div>
+      <a class="ghost-btn" href="#accueil" data-i18n="backTop">Retour en haut</a>
     </div>
   </footer>
 
@@ -307,7 +323,7 @@
       {title:'Supervision Zabbix', cat:'Réseaux', desc:'Hôtes, triggers, alertes, disponibilité et tableaux de bord.', tags:['Zabbix','SNMP','Alerting','SLA']},
       {title:'pfSense + VLAN', cat:'Cybersécurité', desc:'Segmentation réseau, filtrage inter-VLAN et journalisation.', tags:['pfSense','VLAN','Firewall','NAT']},
       {title:'Sauvegarde 3-2-1', cat:'Continuité', desc:'Stratégie de sauvegarde, test de restauration et RPO/RTO.', tags:['Backup','RPO','RTO','rsync']},
-      {title:'Portfolio statique', cat:'Web', desc:'Portfolio léger, prévisualisation PDF et déploiement sans npm.', tags:['HTML','CSS','JS','GitHub Pages']}
+      {title:'Portfolio statique', cat:'Web', desc:'Portfolio léger, prévisualisation PDF et publication simple sur GitHub Pages.', tags:['HTML','CSS','JS','GitHub Pages']}
     ];
     const docs = [
       {title:'CV Théo Andre 2025', type:'CV', file:'fichiers/cv-theo-andre-2025.pdf', kind:'pdf', desc:'CV professionnel à télécharger ou prévisualiser.'},
@@ -328,12 +344,22 @@
     const skills = [
       ['Linux',84], ['Windows Server',80], ['Réseaux',82], ['Cybersécurité',74], ['Supervision',76], ['SQL',68], ['Documentation',88], ['Support',82]
     ];
+    const translations = {
+      fr: {
+        brandSub:'BTS SIO SISR · Portfolio', navHome:'Accueil', navProjects:'Projets', navResources:'Ressources', navSkills:'Compétences', navJourney:'Parcours', navContact:'Contact', themesBtn:'Thèmes', themeTitle:'Ambiance', themeText:'Choisis un rendu plus propre, lisible et fluide.', heroEyebrow:'⚡ Portfolio BTS SIO option SISR', heroTitle:'Systèmes, réseaux & cybersécurité.', heroText:'Étudiant en BTS SIO option SISR, je présente ici mon parcours, mes projets d’infrastructure, mes stages, mes compétences techniques et mes preuves documentaires téléchargeables.', chipSys:'Administration systèmes', chipNet:'Réseaux', chipSupport:'Support', chipCyber:'Cybersécurité', chipDocs:'Documentation', seePdfs:'Voir les PDF', downloadCv:'Télécharger le CV', studentLabel:'Étudiant BTS SIO SISR', availability:'Disponible stage / alternance', localTimeLabel:'🕒 Heure locale', terminalGoal:'Construire une infrastructure fiable, documentée et sécurisée.', statLite:'mode fluide par défaut', statPreview:'prévisualisation immédiate', statStages:'intégrés dans le parcours', statLang:'langue dynamique', projectsEyebrow:'🚀 Projets', projectsTitle:'Projets réalisés', projectsText:'Des projets orientés SISR : support, systèmes, réseaux, supervision, sauvegarde et cybersécurité.', resourcesEyebrow:'📄 Ressources', resourcesTitle:'Prévisualisation & téléchargement', resourcesText:'Clique sur une ressource dans la liste : l’aperçu se charge directement à droite. Le bouton de téléchargement reste disponible pour chaque document.', reloadPreview:'Recharger l’aperçu', downloadBtn:'Télécharger', skillsEyebrow:'🧠 Compétences', skillsTitle:'Compétences techniques', skillsText:'Compétences principales mobilisées pendant la formation, les TP et les stages.', knowHow:'Savoir-faire', domainsTitle:'Domaines SISR', domainsText:'Cette section montre une vision recruteur : technologies, méthodes, documentation et exploitation.', journeyEyebrow:'🎓 Parcours', journeyTitle:'Parcours & expériences', journeyText:'Une timeline claire qui regroupe la progression scolaire, les deux périodes de stage et les compétences développées.', contactEyebrow:'📬 Contact', contactTitle:'Me contacter', contactText:'Un espace simple pour accéder rapidement au CV et aux liens professionnels.', contactBio:'Étudiant BTS SIO option SISR. Recherche de stage, alternance ou opportunité junior dans l’administration systèmes/réseaux.', professionalDocs:'Documents professionnels', professionalDocsText:'CV, attestations, annexes et supports techniques sont disponibles dans la section Ressources.', downloadMyCv:'Télécharger mon CV', footerText:'Portfolio statique, rapide et compatible GitHub Pages.', backTop:'Retour en haut'
+      },
+      en: {
+        brandSub:'BTS SIO SISR · Portfolio', navHome:'Home', navProjects:'Projects', navResources:'Resources', navSkills:'Skills', navJourney:'Journey', navContact:'Contact', themesBtn:'Themes', themeTitle:'Visual theme', themeText:'Choose a cleaner, readable and smooth visual style.', heroEyebrow:'⚡ BTS SIO SISR portfolio', heroTitle:'Systems, networks & cybersecurity.', heroText:'BTS SIO SISR student presenting my journey, infrastructure projects, internships, technical skills and downloadable professional documents.', chipSys:'Systems administration', chipNet:'Networks', chipSupport:'Support', chipCyber:'Cybersecurity', chipDocs:'Documentation', seePdfs:'View PDFs', downloadCv:'Download CV', studentLabel:'BTS SIO SISR student', availability:'Available for internship / apprenticeship', localTimeLabel:'🕒 Local time', terminalGoal:'Build reliable, documented and secure infrastructure.', statLite:'smooth mode by default', statPreview:'instant preview', statStages:'included in the journey', statLang:'dynamic language', projectsEyebrow:'🚀 Projects', projectsTitle:'Completed projects', projectsText:'SISR-oriented projects: support, systems, networks, monitoring, backup and cybersecurity.', resourcesEyebrow:'📄 Resources', resourcesTitle:'Preview & download', resourcesText:'Click a resource in the list: the preview opens directly on the right. The download button remains available for every file.', reloadPreview:'Reload preview', downloadBtn:'Download', skillsEyebrow:'🧠 Skills', skillsTitle:'Technical skills', skillsText:'Main skills used during training, practical work and internships.', knowHow:'Know-how', domainsTitle:'SISR areas', domainsText:'This section gives a recruiter-friendly view: technologies, methods, documentation and operations.', journeyEyebrow:'🎓 Journey', journeyTitle:'Journey & experience', journeyText:'A clear timeline showing academic progress, internships and developed skills.', contactEyebrow:'📬 Contact', contactTitle:'Contact me', contactText:'A simple area to access the CV and professional links quickly.', contactBio:'BTS SIO SISR student looking for an internship, apprenticeship or junior opportunity in systems/network administration.', professionalDocs:'Professional documents', professionalDocsText:'CV, internship certificates, annexes and technical resources are available in the Resources section.', downloadMyCv:'Download my CV', footerText:'Fast static portfolio compatible with GitHub Pages.', backTop:'Back to top'
+      }
+    };
+    let currentLang = localStorage.getItem('lang') || 'fr';
     const timeline = [
-      ['2022','Bac & culture numérique','Bases en systèmes numériques, méthode projet et documentation.'],
-      ['2023','Entrée en BTS SIO','Découverte du développement, SQL, réseau, support et cybersécurité.'],
-      ['2024','Spécialisation SISR','Administration Windows Server/Linux, virtualisation, VLAN, services réseau.'],
-      ['2025','Projets & stages','GLPI, AD, Zabbix, procédures support et preuves professionnelles.'],
-      ['2026','Objectif pro','Alternance ou poste junior en administration systèmes et réseaux.']
+      {year:'2022', label:'Formation', title:'Bases numériques & préparation au BTS', desc:'Consolidation des bases informatiques, logique réseau, outils bureautiques et méthode de travail.', meta:['Formation','Méthode','Documentation']},
+      {year:'2023', label:'BTS SIO', title:'Entrée en BTS SIO', desc:'Découverte des environnements Windows/Linux, du support, des bases de données et des services réseau.', meta:['BTS SIO','Support','Linux','Windows']},
+      {year:'2024', label:'Stage 1', title:'Stage SIO 1', desc:'Première immersion professionnelle avec mise en pratique du support, de la préparation technique et de la communication écrite.', meta:['Stage','Support','Compte rendu','Autonomie']},
+      {year:'2024-2025', label:'SISR', title:'Spécialisation SISR', desc:'Approfondissement en administration système, Active Directory, supervision, sécurité réseau et procédures techniques.', meta:['SISR','AD DS','Réseaux','Sécurité']},
+      {year:'2025', label:'Stage 2', title:'Stage SIO 2', desc:'Période de stage valorisée par une présentation et des attestations, avec davantage de recul sur l’infrastructure et les besoins utilisateurs.', meta:['Stage','Présentation','Infrastructure','Analyse']},
+      {year:'Objectif', label:'Suite', title:'Poursuite vers l’alternance / poste junior', desc:'Mettre à profit les compétences acquises sur le terrain dans un environnement d’administration systèmes et réseaux.', meta:['Alternance','Junior','Systèmes','Réseaux']}
     ];
     const tagColors = ['#38bdf8','#34d399','#fb7185','#fbbf24','#a78bfa','#60a5fa','#f472b6','#f97316'];
     let selectedDoc = docs[0];
@@ -358,38 +384,71 @@
       document.getElementById('docList').innerHTML = filtered.map((d,i)=>`
         <button class="panel card doc-card ${selectedDoc.file===d.file?'active':''}" data-file="${d.file}">
           <span class="tag" style="${colorFor(d.type)}">${d.type}</span><h3 style="margin-top:.55rem">${d.title}</h3><p>${d.desc}</p>
-          <div class="chips"><span class="chip">${d.kind.toUpperCase()}</span><span class="chip">Préview à la demande</span></div>
+          <div class="chips"><span class="chip">${d.kind.toUpperCase()}</span><span class="chip">Aperçu direct</span></div>
         </button>`).join('');
-      document.querySelectorAll('.doc-card').forEach(btn=>btn.onclick=()=>{ selectedDoc = docs.find(d=>d.file===btn.dataset.file); updateViewer(false); renderDocs(); });
+      document.querySelectorAll('.doc-card').forEach(btn=>btn.onclick=()=>{
+        selectedDoc = docs.find(d=>d.file===btn.dataset.file);
+        renderDocs();
+        updateViewer(true);
+      });
     }
-    function updateViewer(load){
+    function updateViewer(load=true){
       document.getElementById('viewerType').textContent = selectedDoc.type;
       document.getElementById('viewerTitle').textContent = selectedDoc.title;
       document.getElementById('viewerDesc').textContent = selectedDoc.desc;
       document.getElementById('downloadBtn').href = selectedDoc.file;
       document.getElementById('downloadBtn').setAttribute('download','');
       const frame = document.getElementById('viewerFrame');
-      if(!load){ frame.innerHTML = '<div class="viewer-empty">Aperçu non chargé pour économiser les ressources.<br/>Clique sur “Prévisualiser”.</div>'; return; }
-      if(selectedDoc.kind==='pdf') frame.innerHTML = `<iframe src="${selectedDoc.file}" title="${selectedDoc.title}"></iframe>`;
+      if(!load){ frame.innerHTML = '<div class="viewer-empty">Choisis un document dans la liste pour afficher son aperçu ici.</div>'; return; }
+      if(selectedDoc.kind==='pdf') {
+        frame.innerHTML = `<object data="${selectedDoc.file}#toolbar=0&navpanes=0&scrollbar=1" type="application/pdf" width="100%" height="100%"><iframe src="${selectedDoc.file}#toolbar=0&navpanes=0" title="${selectedDoc.title}"></iframe><div class="viewer-empty">L’aperçu intégré n’est pas disponible sur ce navigateur.<br/><a href="${selectedDoc.file}" target="_blank" rel="noopener">Ouvrir le PDF</a></div></object>`;
+      }
       else if(selectedDoc.kind==='image') frame.innerHTML = `<img src="${selectedDoc.file}" alt="${selectedDoc.title}">`;
-      else frame.innerHTML = '<div class="viewer-empty">Ce fichier ne se prévisualise pas directement ici.<br/>Utilise le bouton Télécharger.</div>';
+      else frame.innerHTML = '<div class="viewer-empty">Ce fichier ne se prévisualise pas directement dans le navigateur.<br/>Utilise le bouton Télécharger pour l’ouvrir localement.</div>';
     }
     function renderSkills(){
       document.getElementById('skillsBox').innerHTML = skills.map(([name,val])=>`<div class="skill-row"><div class="skill-head"><span>${name}</span><span>${val}%</span></div><div class="bar"><span style="--v:${val}%"></span></div></div>`).join('');
     }
     function renderTimeline(){
-      document.getElementById('timeline').innerHTML = timeline.map(([year,title,desc])=>`<div class="time-item panel panel-pad reveal"><span class="tag" style="${colorFor(year)}">${year}</span><h3 style="margin-top:.65rem">${title}</h3><p>${desc}</p></div>`).join('');
+      document.getElementById('timeline').innerHTML = timeline.map((item)=>`<div class="time-item panel panel-pad reveal"><span class="tag" style="${colorFor(item.year)}">${item.year}</span><div class="time-role">${item.label}</div><h3 style="margin-top:.45rem">${item.title}</h3><p>${item.desc}</p><div class="time-meta">${item.meta.map(meta=>`<span class="chip">${meta}</span>`).join('')}</div></div>`).join('');
     }
     function reveal(){ document.querySelectorAll('.reveal').forEach(el=>{ if(el.getBoundingClientRect().top < innerHeight - 70) el.classList.add('visible'); }); }
     function progress(){ const max=document.documentElement.scrollHeight-innerHeight; document.getElementById('progress').style.width=(max?scrollY/max*100:0)+'%'; }
     function activeNav(){ const links=[...document.querySelectorAll('.nav-links a')]; let current=''; links.forEach(a=>{ const s=document.querySelector(a.getAttribute('href')); if(s && s.offsetTop-120 <= scrollY) current=a.getAttribute('href'); }); links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===current)); }
 
+    function applyLanguage(){
+      const dict = translations[currentLang] || translations.fr;
+      document.documentElement.lang = currentLang;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if(dict[key]) el.textContent = dict[key];
+      });
+      const langBtn = document.getElementById('langToggle');
+      if(langBtn) {
+        langBtn.textContent = currentLang === 'fr' ? '🌐 FR' : '🌐 EN';
+        langBtn.classList.add('lang-pulse');
+        setTimeout(()=>langBtn.classList.remove('lang-pulse'), 220);
+      }
+      updateClock();
+    }
+    function updateClock(){
+      const timeBox = document.getElementById('localTime');
+      const dateBox = document.getElementById('localDate');
+      if(!timeBox || !dateBox) return;
+      const now = new Date();
+      const locale = currentLang === 'fr' ? 'fr-FR' : 'en-GB';
+      timeBox.textContent = now.toLocaleTimeString(locale, {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+      dateBox.textContent = now.toLocaleDateString(locale, {weekday:'long', day:'2-digit', month:'long', year:'numeric'});
+    }
+
     document.getElementById('themeToggle').onclick=()=>document.getElementById('themePanel').classList.toggle('open');
     document.getElementById('menuBtn').onclick=()=>document.getElementById('nav').classList.toggle('open');
     document.querySelectorAll('[data-theme-choice]').forEach(b=>b.onclick=()=>{ document.body.dataset.theme=b.dataset.themeChoice; localStorage.setItem('theme',b.dataset.themeChoice); });
+    document.getElementById('langToggle').onclick=()=>{ currentLang = currentLang === 'fr' ? 'en' : 'fr'; localStorage.setItem('lang', currentLang); applyLanguage(); };
     document.getElementById('previewBtn').onclick=()=>updateViewer(true);
-    document.body.dataset.theme = localStorage.getItem('theme') || 'neon';
-    renderProjects(); renderFilters(); renderDocs(); updateViewer(false); renderSkills(); renderTimeline(); reveal(); progress(); activeNav();
+    const savedTheme = localStorage.getItem('theme');
+    document.body.dataset.theme = ['obsidian','ocean','forest','light','redteam'].includes(savedTheme) ? savedTheme : 'obsidian';
+    applyLanguage(); updateClock(); setInterval(updateClock, 1000); renderProjects(); renderFilters(); renderDocs(); updateViewer(true); renderSkills(); renderTimeline(); reveal(); progress(); activeNav();
     addEventListener('scroll',()=>{ reveal(); progress(); activeNav(); }, {passive:true});
   </script>
 </body>
