@@ -146,6 +146,11 @@
     .viewer-frame { margin-top:1rem; height: 560px; border-radius:1.3rem; overflow:hidden; border:1px solid var(--border); background: color-mix(in srgb, var(--bg) 70%, black); display:grid; place-items:center; }
     .viewer-frame iframe, .viewer-frame img { width:100%; height:100%; border:0; object-fit:contain; background:white; }
     .viewer-empty { max-width: 420px; text-align:center; padding:2rem; color:var(--muted); }
+
+    .oral-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:1rem; }
+    .oral-card { min-height: 245px; }
+    .quote-script { margin-top:1.2rem; border-color: color-mix(in srgb, var(--a) 45%, var(--border)); }
+    .quote-script p { font-size:1.05rem; line-height:1.85; }
     .contact-box { display:grid; grid-template-columns: 1fr 1fr; gap:1.2rem; }
     .mobile-menu { display:none; }
     .theme-panel { position:fixed; right:1rem; top:5.2rem; z-index:70; width:min(360px, calc(100vw - 2rem)); padding:1rem; display:none; }
@@ -177,7 +182,7 @@
     @keyframes orbMove { 0%,100% { transform:translate(-40%, -30%) scale(.9); } 50% { transform:translate(35%, 20%) scale(1.12); } }
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
     @media (max-width: 980px) {
-      .hero, .doc-layout, .contact-box { grid-template-columns: 1fr; }
+      .hero, .doc-layout, .contact-box, .oral-grid { grid-template-columns: 1fr; }
       .stats, .grid-3, .grid-2 { grid-template-columns: 1fr 1fr; }
       .viewer { position:relative; top:0; }
       .nav-links { display:none; }
@@ -212,6 +217,7 @@
         <a href="#ressources" data-i18n="navResources">Ressources</a>
         <a href="#competences" data-i18n="navSkills">Compétences</a>
         <a href="#parcours" data-i18n="navJourney">Parcours</a>
+        <a href="#oral" data-i18n="navOral">Oral</a>
         <a href="#contact" data-i18n="navContact">Contact</a>
       </div>
       <div class="nav-tools">
@@ -285,7 +291,7 @@
         <article class="panel panel-pad viewer" id="viewer">
           <span class="eyebrow" id="viewerType">Document</span>
           <h3 id="viewerTitle" style="margin-top:.9rem">Sélectionne une ressource</h3>
-          <p id="viewerDesc">Choisis un PDF, une image ou un fichier Excel dans la liste.</p>
+          <p id="viewerDesc">Choisis un PDF ou une image dans la liste.</p>
           <div class="doc-actions">
             <button class="preview-btn" id="previewBtn" type="button">↗️ <span data-i18n="openPreview">Ouvrir en grand</span></button>
             <a class="download-btn" id="downloadBtn" href="#" download>⬇️ <span data-i18n="downloadBtn">Télécharger</span></a>
@@ -306,6 +312,38 @@
     <section id="parcours" class="container">
       <div class="section-head reveal"><span class="eyebrow" data-i18n="journeyEyebrow">🎓 Parcours</span><h2 style="margin-top:1rem" data-i18n="journeyTitle">Parcours & expériences</h2><p data-i18n="journeyText">Une timeline claire qui regroupe la progression scolaire, les deux périodes de stage et les compétences développées.</p></div>
       <div class="timeline" id="timeline"></div>
+    </section>
+
+
+
+    <section id="oral" class="container">
+      <div class="section-head reveal"><span class="eyebrow" data-i18n="oralEyebrow">🎤 Préparation oral</span><h2 style="margin-top:1rem" data-i18n="oralTitle">Script court pour l’épreuve</h2><p data-i18n="oralText">Les examinateurs peuvent s’appuyer sur le tableau de synthèse E5 : cette partie t’aide à faire le lien entre le tableau, tes stages et tes preuves.</p></div>
+      <div class="oral-grid">
+        <article class="panel panel-pad reveal oral-card">
+          <span class="tag" style="--x:#38bdf8;--y:#2563eb">1 min</span>
+          <h3>Introduction</h3>
+          <p>Bonjour, je m’appelle Théo Andre, je suis étudiant en BTS SIO option SISR. Mon portfolio regroupe mon parcours, mes projets, mes stages et les documents qui justifient les compétences de mon tableau de synthèse E5.</p>
+        </article>
+        <article class="panel panel-pad reveal oral-card">
+          <span class="tag" style="--x:#34d399;--y:#059669">Stage 1</span>
+          <h3>Fédération des Centres Sociaux</h3>
+          <p>Pour ma première période, j’ai travaillé sur la sensibilisation à la cybersécurité, la maintenance réseau, la baie de brassage, WordPress et la recherche d’un vidéoprojecteur. Je peux relier ces missions à la documentation, au support utilisateur et à la sécurisation des usages numériques.</p>
+        </article>
+        <article class="panel panel-pad reveal oral-card">
+          <span class="tag" style="--x:#f97316;--y:#f43f5e">Stage 2</span>
+          <h3>École de conduite Roulez Jeunesse</h3>
+          <p>Pour ma deuxième période, j’ai vérifié les sauvegardes OneDrive, la maintenance des postes, le système de vidéosurveillance, les paramètres de sécurité et le site internet. Ces missions montrent ma capacité à contrôler, sécuriser et documenter un environnement réel.</p>
+        </article>
+        <article class="panel panel-pad reveal oral-card">
+          <span class="tag" style="--x:#a78bfa;--y:#7c3aed">E5</span>
+          <h3>Comment répondre au jury</h3>
+          <p>Si on me demande une preuve, je pars du tableau E5, je donne l’activité concernée, j’ouvre le document correspondant dans la section Ressources, puis j’explique : le contexte, ce que j’ai fait, l’outil utilisé, la difficulté rencontrée et le résultat obtenu.</p>
+        </article>
+      </div>
+      <div class="panel panel-pad reveal quote-script">
+        <h3>Script prêt à dire</h3>
+        <p>« Pour présenter mon dossier, je vais partir du tableau de synthèse. Chaque activité du tableau correspond à une situation concrète que j’ai vécue ou réalisée : soit en stage, soit en TP, soit dans un projet. Par exemple, en SIO1 j’ai travaillé sur la sensibilisation à la cybersécurité et la maintenance réseau à la Fédération des Centres Sociaux. En SIO2, chez Roulez Jeunesse, j’ai travaillé sur les sauvegardes OneDrive, la maintenance des postes, la vidéosurveillance, la sécurité et le site internet. Pour chaque compétence, je peux ouvrir la preuve dans mon portfolio, expliquer le contexte, l’action réalisée, les outils utilisés et ce que cela m’a apporté professionnellement. »</p>
+      </div>
     </section>
 
     <section id="contact" class="container">
@@ -336,6 +374,8 @@
     const docs = [
       {title:'CV Théo Andre 2025', type:'CV', file:'fichiers/cv-theo-andre-2025.pdf', kind:'pdf', desc:'CV professionnel à télécharger ou prévisualiser.'},
       {title:'Annexe E5 — Tableau de synthèse', type:'E5', file:'fichiers/annexe-e5-tableau-synthese.pdf', kind:'pdf', desc:'Version PDF du tableau de synthèse E5.'},
+      {title:'Rapport de stage 1ère année — Centres Sociaux', type:'Stage', file:'fichiers/rapport-stage-sio1-centres-sociaux.pdf', kind:'pdf', desc:'Rapport SIO1 : sensibilisation cybersécurité, baie de brassage, WordPress et vidéoprojecteur.'},
+      {title:'Rapport de stage 2e année — Roulez Jeunesse', type:'Stage', file:'fichiers/rapport-stage-sio2-roulez-jeunesse.pdf', kind:'pdf', desc:'Rapport SIO2 : sauvegardes OneDrive, maintenance postes, vidéosurveillance, sécurité et site web.'},
       {title:'Attestation de stage 1ère année', type:'Stage', file:'fichiers/attestation-stage-sio1.pdf', kind:'pdf', desc:'Attestation officielle du stage de première année.'},
       {title:'Attestation de stage 2e année', type:'Stage', file:'fichiers/attestation-stage.pdf', kind:'pdf', desc:'Attestation officielle du stage de deuxième année.'},
       {title:'Présentation stage SIO2', type:'Stage', file:'fichiers/presentation-stage-sio2.pdf', kind:'pdf', desc:'Support de présentation de stage.'},
@@ -352,19 +392,19 @@
     ];
     const translations = {
       fr: {
-        brandSub:'BTS SIO SISR · Portfolio', navHome:'Accueil', navProjects:'Projets', navResources:'Ressources', navSkills:'Compétences', navJourney:'Parcours', navContact:'Contact', themesBtn:'Thèmes', themeTitle:'Ambiance', themeText:'Choisis un rendu plus propre, lisible et fluide.', heroEyebrow:'⚡ Portfolio BTS SIO option SISR', heroTitle:'Systèmes, réseaux & cybersécurité.', heroText:'Étudiant en BTS SIO option SISR, je présente ici mon parcours, mes projets d’infrastructure, mes stages, mes compétences techniques et mes preuves documentaires téléchargeables.', chipSys:'Administration systèmes', chipNet:'Réseaux', chipSupport:'Support', chipCyber:'Cybersécurité', chipDocs:'Documentation', seePdfs:'Voir les PDF', downloadCv:'Télécharger le CV', studentLabel:'Étudiant BTS SIO SISR', availability:'Disponible stage / alternance', localTimeLabel:'🕒 Heure locale', terminalGoal:'Construire une infrastructure fiable, documentée et sécurisée.', statLite:'mode fluide par défaut', statPreview:'prévisualisation immédiate', statStages:'intégrés dans le parcours', statLang:'langue dynamique', projectsEyebrow:'🚀 Projets', projectsTitle:'Projets réalisés', projectsText:'Des projets orientés SISR : support, systèmes, réseaux, supervision, sauvegarde et cybersécurité.', resourcesEyebrow:'📄 Ressources', resourcesTitle:'Prévisualisation & téléchargement', resourcesText:'Clique sur une ressource dans la liste : l’aperçu se charge directement à droite. Le bouton de téléchargement reste disponible pour chaque document.', openPreview:'Ouvrir en grand', downloadBtn:'Télécharger', skillsEyebrow:'🧠 Compétences', skillsTitle:'Compétences techniques', skillsText:'Compétences principales mobilisées pendant la formation, les TP et les stages.', knowHow:'Savoir-faire', domainsTitle:'Domaines SISR', domainsText:'Cette section montre une vision recruteur : technologies, méthodes, documentation et exploitation.', journeyEyebrow:'🎓 Parcours', journeyTitle:'Parcours & expériences', journeyText:'Une timeline claire qui regroupe la progression scolaire, les deux périodes de stage et les compétences développées.', contactEyebrow:'📬 Contact', contactTitle:'Me contacter', contactText:'Un espace simple pour accéder rapidement au CV et aux liens professionnels.', contactBio:'Étudiant BTS SIO option SISR. Recherche de stage, alternance ou opportunité junior dans l’administration systèmes/réseaux.', professionalDocs:'Documents professionnels', professionalDocsText:'CV, attestations, annexes et supports techniques sont disponibles dans la section Ressources.', downloadMyCv:'Télécharger mon CV', footerText:'Portfolio statique, rapide et compatible GitHub Pages.', backTop:'Retour en haut'
+        brandSub:'BTS SIO SISR · Portfolio', navHome:'Accueil', navProjects:'Projets', navResources:'Ressources', navSkills:'Compétences', navJourney:'Parcours', navOral:'Oral', navContact:'Contact', themesBtn:'Thèmes', themeTitle:'Ambiance', themeText:'Choisis un rendu plus propre, lisible et fluide.', heroEyebrow:'⚡ Portfolio BTS SIO option SISR', heroTitle:'Systèmes, réseaux & cybersécurité.', heroText:'Étudiant en BTS SIO option SISR, je présente ici mon parcours, mes projets d’infrastructure, mes stages, mes compétences techniques et mes preuves documentaires téléchargeables.', chipSys:'Administration systèmes', chipNet:'Réseaux', chipSupport:'Support', chipCyber:'Cybersécurité', chipDocs:'Documentation', seePdfs:'Voir les PDF', downloadCv:'Télécharger le CV', studentLabel:'Étudiant BTS SIO SISR', availability:'Disponible stage / alternance', localTimeLabel:'🕒 Heure locale', terminalGoal:'Construire une infrastructure fiable, documentée et sécurisée.', statLite:'mode fluide par défaut', statPreview:'prévisualisation immédiate', statStages:'intégrés dans le parcours', statLang:'langue dynamique', projectsEyebrow:'🚀 Projets', projectsTitle:'Projets réalisés', projectsText:'Des projets orientés SISR : support, systèmes, réseaux, supervision, sauvegarde et cybersécurité.', resourcesEyebrow:'📄 Ressources', resourcesTitle:'Prévisualisation & téléchargement', resourcesText:'Clique sur une ressource dans la liste : l’aperçu se charge directement à droite. Le bouton de téléchargement reste disponible pour chaque document.', openPreview:'Ouvrir en grand', downloadBtn:'Télécharger', skillsEyebrow:'🧠 Compétences', skillsTitle:'Compétences techniques', skillsText:'Compétences principales mobilisées pendant la formation, les TP et les stages.', knowHow:'Savoir-faire', domainsTitle:'Domaines SISR', domainsText:'Cette section montre une vision recruteur : technologies, méthodes, documentation et exploitation.', journeyEyebrow:'🎓 Parcours', journeyTitle:'Parcours & expériences', journeyText:'Une timeline claire qui regroupe la progression scolaire, les deux périodes de stage et les compétences développées.', oralEyebrow:'🎤 Préparation oral', oralTitle:'Script court pour l’épreuve', oralText:'Les examinateurs peuvent s’appuyer sur le tableau de synthèse E5 : cette partie t’aide à faire le lien entre le tableau, tes stages et tes preuves.', contactEyebrow:'📬 Contact', contactTitle:'Me contacter', contactText:'Un espace simple pour accéder rapidement au CV et aux liens professionnels.', contactBio:'Étudiant BTS SIO option SISR. Recherche de stage, alternance ou opportunité junior dans l’administration systèmes/réseaux.', professionalDocs:'Documents professionnels', professionalDocsText:'CV, attestations, annexes et supports techniques sont disponibles dans la section Ressources.', downloadMyCv:'Télécharger mon CV', footerText:'Portfolio statique, rapide et compatible GitHub Pages.', backTop:'Retour en haut'
       },
       en: {
-        brandSub:'BTS SIO SISR · Portfolio', navHome:'Home', navProjects:'Projects', navResources:'Resources', navSkills:'Skills', navJourney:'Journey', navContact:'Contact', themesBtn:'Themes', themeTitle:'Visual theme', themeText:'Choose a cleaner, readable and smooth visual style.', heroEyebrow:'⚡ BTS SIO SISR portfolio', heroTitle:'Systems, networks & cybersecurity.', heroText:'BTS SIO SISR student presenting my journey, infrastructure projects, internships, technical skills and downloadable professional documents.', chipSys:'Systems administration', chipNet:'Networks', chipSupport:'Support', chipCyber:'Cybersecurity', chipDocs:'Documentation', seePdfs:'View PDFs', downloadCv:'Download CV', studentLabel:'BTS SIO SISR student', availability:'Available for internship / apprenticeship', localTimeLabel:'🕒 Local time', terminalGoal:'Build reliable, documented and secure infrastructure.', statLite:'smooth mode by default', statPreview:'instant preview', statStages:'included in the journey', statLang:'dynamic language', projectsEyebrow:'🚀 Projects', projectsTitle:'Completed projects', projectsText:'SISR-oriented projects: support, systems, networks, monitoring, backup and cybersecurity.', resourcesEyebrow:'📄 Resources', resourcesTitle:'Preview & download', resourcesText:'Click a resource in the list: the preview opens directly on the right. The download button remains available for every file.', openPreview:'Open full preview', downloadBtn:'Download', skillsEyebrow:'🧠 Skills', skillsTitle:'Technical skills', skillsText:'Main skills used during training, practical work and internships.', knowHow:'Know-how', domainsTitle:'SISR areas', domainsText:'This section gives a recruiter-friendly view: technologies, methods, documentation and operations.', journeyEyebrow:'🎓 Journey', journeyTitle:'Journey & experience', journeyText:'A clear timeline showing academic progress, internships and developed skills.', contactEyebrow:'📬 Contact', contactTitle:'Contact me', contactText:'A simple area to access the CV and professional links quickly.', contactBio:'BTS SIO SISR student looking for an internship, apprenticeship or junior opportunity in systems/network administration.', professionalDocs:'Professional documents', professionalDocsText:'CV, internship certificates, annexes and technical resources are available in the Resources section.', downloadMyCv:'Download my CV', footerText:'Fast static portfolio compatible with GitHub Pages.', backTop:'Back to top'
+        brandSub:'BTS SIO SISR · Portfolio', navHome:'Home', navProjects:'Projects', navResources:'Resources', navSkills:'Skills', navJourney:'Journey', navOral:'Oral', navContact:'Contact', themesBtn:'Themes', themeTitle:'Visual theme', themeText:'Choose a cleaner, readable and smooth visual style.', heroEyebrow:'⚡ BTS SIO SISR portfolio', heroTitle:'Systems, networks & cybersecurity.', heroText:'BTS SIO SISR student presenting my journey, infrastructure projects, internships, technical skills and downloadable professional documents.', chipSys:'Systems administration', chipNet:'Networks', chipSupport:'Support', chipCyber:'Cybersecurity', chipDocs:'Documentation', seePdfs:'View PDFs', downloadCv:'Download CV', studentLabel:'BTS SIO SISR student', availability:'Available for internship / apprenticeship', localTimeLabel:'🕒 Local time', terminalGoal:'Build reliable, documented and secure infrastructure.', statLite:'smooth mode by default', statPreview:'instant preview', statStages:'included in the journey', statLang:'dynamic language', projectsEyebrow:'🚀 Projects', projectsTitle:'Completed projects', projectsText:'SISR-oriented projects: support, systems, networks, monitoring, backup and cybersecurity.', resourcesEyebrow:'📄 Resources', resourcesTitle:'Preview & download', resourcesText:'Click a resource in the list: the preview opens directly on the right. The download button remains available for every file.', openPreview:'Open full preview', downloadBtn:'Download', skillsEyebrow:'🧠 Skills', skillsTitle:'Technical skills', skillsText:'Main skills used during training, practical work and internships.', knowHow:'Know-how', domainsTitle:'SISR areas', domainsText:'This section gives a recruiter-friendly view: technologies, methods, documentation and operations.', journeyEyebrow:'🎓 Journey', journeyTitle:'Journey & experience', journeyText:'A clear timeline showing academic progress, internships and developed skills.', oralEyebrow:'🎤 Oral preparation', oralTitle:'Short exam script', oralText:'The examiners may use the E5 summary table: this section helps connect the table, internships and evidence.', contactEyebrow:'📬 Contact', contactTitle:'Contact me', contactText:'A simple area to access the CV and professional links quickly.', contactBio:'BTS SIO SISR student looking for an internship, apprenticeship or junior opportunity in systems/network administration.', professionalDocs:'Professional documents', professionalDocsText:'CV, internship certificates, annexes and technical resources are available in the Resources section.', downloadMyCv:'Download my CV', footerText:'Fast static portfolio compatible with GitHub Pages.', backTop:'Back to top'
       }
     };
     let currentLang = localStorage.getItem('lang') || 'fr';
     const timeline = [
       {year:'2022', label:'Formation', title:'Bases numériques & préparation au BTS', desc:'Consolidation des bases informatiques, logique réseau, outils bureautiques et méthode de travail.', meta:['Formation','Méthode','Documentation']},
       {year:'2023', label:'BTS SIO', title:'Entrée en BTS SIO', desc:'Découverte des environnements Windows/Linux, du support, des bases de données et des services réseau.', meta:['BTS SIO','Support','Linux','Windows']},
-      {year:'2024', label:'Stage 1', title:'Stage SIO 1', desc:'Première immersion professionnelle avec mise en pratique du support, de la préparation technique et de la communication écrite.', meta:['Stage','Support','Compte rendu','Autonomie']},
+      {year:'2025', label:'Stage 1', title:'Fédération des Centres Sociaux de la Nièvre', desc:'Stage SIO1 : sensibilisation à la cybersécurité, maintenance réseau, réorganisation de baie de brassage, gestion WordPress et recherche de vidéoprojecteur.', meta:['Stage','Cybersécurité','Baie de brassage','WordPress']},
       {year:'2024-2025', label:'SISR', title:'Spécialisation SISR', desc:'Approfondissement en administration système, Active Directory, supervision, sécurité réseau et procédures techniques.', meta:['SISR','AD DS','Réseaux','Sécurité']},
-      {year:'2025', label:'Stage 2', title:'Stage SIO 2', desc:'Période de stage valorisée par une présentation et des attestations, avec davantage de recul sur l’infrastructure et les besoins utilisateurs.', meta:['Stage','Présentation','Infrastructure','Analyse']},
+      {year:'2025', label:'Stage 2', title:'École de conduite Roulez Jeunesse', desc:'Stage SIO2 : sauvegardes OneDrive, maintenance Windows, vidéosurveillance, sécurité des postes, site internet et communication.', meta:['Stage','Sauvegardes','Maintenance','Sécurité']},
       {year:'Objectif', label:'Suite', title:'Poursuite vers l’alternance / poste junior', desc:'Mettre à profit les compétences acquises sur le terrain dans un environnement d’administration systèmes et réseaux.', meta:['Alternance','Junior','Systèmes','Réseaux']}
     ];
     const tagColors = ['#38bdf8','#34d399','#fb7185','#fbbf24','#a78bfa','#60a5fa','#f472b6','#f97316'];
