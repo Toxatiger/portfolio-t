@@ -22,11 +22,11 @@
       --shadow: rgba(212,175,55,.20);
       color-scheme: dark;
     }
-    [data-theme="obsidian"] { --bg:#08080d; --bg2:#111827; --text:#f8fafc; --muted:#d1d5db; --muted2:#9ca3af; --a:#d4af37; --b:#60a5fa; --c:#f97316; --shadow:rgba(212,175,55,.20); }
-    [data-theme="ocean"] { --bg:#031420; --bg2:#082f49; --text:#f0f9ff; --muted:#bae6fd; --muted2:#7dd3fc; --a:#22d3ee; --b:#2563eb; --c:#a5f3fc; --shadow:rgba(34,211,238,.22); }
-    [data-theme="forest"] { --bg:#04130d; --bg2:#052e1a; --text:#f0fdf4; --muted:#bbf7d0; --muted2:#86efac; --a:#34d399; --b:#16a34a; --c:#facc15; --shadow:rgba(52,211,153,.20); }
-    [data-theme="light"] { --bg:#f8fafc; --bg2:#e0f2fe; --card:rgba(255,255,255,.84); --card2:rgba(255,255,255,.96); --border:rgba(15,23,42,.14); --text:#0f172a; --muted:#334155; --muted2:#64748b; --a:#2563eb; --b:#7c3aed; --c:#f97316; --shadow:rgba(37,99,235,.16); color-scheme: light; }
-    [data-theme="redteam"] { --bg:#080506; --bg2:#1f0a0d; --text:#fff1f2; --muted:#fecdd3; --muted2:#fda4af; --a:#dc2626; --b:#f97316; --c:#facc15; --shadow:rgba(220,38,38,.23); }
+    [data-theme="obsidian"] { --bg:#06070b; --bg2:#111317; --card:rgba(255,255,255,.065); --card2:rgba(255,255,255,.105); --text:#f8fafc; --muted:#d8dee9; --muted2:#9aa4b2; --a:#d4af37; --b:#38bdf8; --c:#f97316; --shadow:rgba(212,175,55,.18); }
+    [data-theme="ocean"] { --bg:#020617; --bg2:#0b2845; --card:rgba(125,211,252,.08); --card2:rgba(255,255,255,.12); --text:#eff6ff; --muted:#bfdbfe; --muted2:#93c5fd; --a:#38bdf8; --b:#2563eb; --c:#22d3ee; --shadow:rgba(56,189,248,.20); }
+    [data-theme="forest"] { --bg:#03100b; --bg2:#102016; --card:rgba(187,247,208,.07); --card2:rgba(255,255,255,.11); --text:#f0fdf4; --muted:#bbf7d0; --muted2:#86efac; --a:#34d399; --b:#22c55e; --c:#facc15; --shadow:rgba(52,211,153,.18); }
+    [data-theme="light"] { --bg:#f8fafc; --bg2:#eef2ff; --card:rgba(255,255,255,.86); --card2:rgba(255,255,255,.98); --border:rgba(15,23,42,.14); --text:#0f172a; --muted:#334155; --muted2:#64748b; --a:#2563eb; --b:#7c3aed; --c:#f97316; --shadow:rgba(37,99,235,.13); color-scheme: light; }
+    [data-theme="redteam"] { --bg:#070507; --bg2:#1b0a0d; --card:rgba(248,113,113,.07); --card2:rgba(255,255,255,.11); --text:#fff1f2; --muted:#fecdd3; --muted2:#fda4af; --a:#f43f5e; --b:#fb923c; --c:#fde047; --shadow:rgba(244,63,94,.18); }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -94,9 +94,6 @@
     .neon { background: linear-gradient(90deg,var(--a),var(--b),var(--c),var(--a)); background-size: 260% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gradient 7s ease-in-out infinite; filter: drop-shadow(0 0 22px var(--shadow)); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.6rem; }
     .chips { display:flex; flex-wrap: wrap; gap:.55rem; margin-top: 1.2rem; }
-    .local-widget { display:grid; gap:.25rem; }
-    .clock-time { display:block; margin-top:.65rem; font-size: clamp(2rem, 4vw, 3rem); letter-spacing:.06em; line-height:1; }
-    .clock-date { margin:.25rem 0 0; color:var(--muted2); text-transform: capitalize; }
     .lang-pulse { box-shadow: 0 0 0 3px color-mix(in srgb, var(--a) 16%, transparent); }
     .chip, .tag { display:inline-flex; align-items:center; border-radius:999px; padding:.34rem .68rem; font-size:.78rem; font-weight:900; border:1px solid var(--border); background:var(--card); color:var(--muted); }
     .tag { --x: var(--a); --y: var(--b); color: color-mix(in srgb, var(--x) 78%, white); border-color: color-mix(in srgb, var(--x) 36%, var(--border)); background: linear-gradient(135deg, color-mix(in srgb, var(--x) 18%, transparent), color-mix(in srgb, var(--y) 14%, transparent)); }
@@ -119,7 +116,7 @@
     .grid-2 { grid-template-columns: repeat(2,1fr); }
     .card { padding:1.2rem; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
     .card:hover { transform: translateY(-5px); border-color: color-mix(in srgb, var(--a) 48%, var(--border)); box-shadow: 0 28px 82px var(--shadow); }
-    .project-top { height: 170px; border-radius: 1.4rem; border:1px solid var(--border); background: radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--a) 40%, transparent), transparent 35%), linear-gradient(135deg, color-mix(in srgb, var(--a) 26%, transparent), color-mix(in srgb, var(--b) 18%, transparent)); display:flex; align-items:center; justify-content:center; margin-bottom:1rem; overflow:hidden; }
+    .project-top { position:relative; height: 170px; border-radius: 1.4rem; border:1px solid var(--border); background: radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--a) 40%, transparent), transparent 35%), linear-gradient(135deg, color-mix(in srgb, var(--a) 26%, transparent), color-mix(in srgb, var(--b) 18%, transparent)); display:flex; align-items:center; justify-content:center; margin-bottom:1rem; overflow:hidden; }
     .network-mini { position:relative; width: 180px; height: 110px; }
     .node { position:absolute; width:48px; height:48px; border-radius: 1rem; display:grid; place-items:center; background:linear-gradient(135deg,var(--a),var(--b)); color:var(--bg); font-weight:1000; box-shadow: 0 0 38px var(--shadow); }
     .node.a{left:0; top:32px}.node.b{right:0; top:0}.node.c{left:68px; bottom:0}
@@ -158,7 +155,26 @@
     .reveal { opacity: 0; transform: translateY(18px); transition: .55s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
     footer { padding: 2.8rem 0; border-top:1px solid var(--border); background: color-mix(in srgb, var(--bg) 72%, transparent); }
+
+    .nav-tools { display:flex; gap:.55rem; align-items:center; }
+    .nav-clock { display:inline-flex; align-items:center; gap:.45rem; border:1px solid var(--border); border-radius:999px; background: color-mix(in srgb, var(--card) 78%, transparent); padding:.58rem .85rem; color:var(--muted); font-size:.86rem; font-weight:950; letter-spacing:.03em; box-shadow: inset 0 1px 0 rgba(255,255,255,.05); }
+    .nav-clock::before { content:"🕒"; filter: drop-shadow(0 0 8px var(--shadow)); }
+    .flag-dim { opacity:.45; filter: grayscale(.25); margin-left:.15rem; }
+    .language-flags { min-width: 6.4rem; }
+    .panel::before { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(120deg, transparent, rgba(255,255,255,.075), transparent); transform:translateX(-125%); transition: transform .7s ease; }
+    .panel:hover::before { transform:translateX(125%); }
+    .brand-logo { animation: logoFloat 5s ease-in-out infinite; }
+    .eyebrow, .tag, .chip { animation: softAppear .55s ease both; }
+    .doc-card.active { animation: selectedGlow 2.4s ease-in-out infinite; }
+    .viewer-frame { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--a) 16%, transparent), 0 18px 60px rgba(0,0,0,.18); }
+    .viewer-frame object { width:100%; height:100%; }
+    .project-top::after { content:""; position:absolute; width:14rem; height:14rem; border-radius:50%; background:radial-gradient(circle, color-mix(in srgb, var(--a) 22%, transparent), transparent 70%); animation: orbMove 8s ease-in-out infinite; }
+
     @keyframes gradient { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    @keyframes logoFloat { 0%,100% { transform:translateY(0) rotate(0deg); } 50% { transform:translateY(-3px) rotate(-2deg); } }
+    @keyframes softAppear { from { opacity:.0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes selectedGlow { 0%,100% { box-shadow: 0 18px 54px var(--shadow); } 50% { box-shadow: 0 24px 78px color-mix(in srgb, var(--a) 30%, transparent); } }
+    @keyframes orbMove { 0%,100% { transform:translate(-40%, -30%) scale(.9); } 50% { transform:translate(35%, 20%) scale(1.12); } }
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
     @media (max-width: 980px) {
       .hero, .doc-layout, .contact-box { grid-template-columns: 1fr; }
@@ -175,6 +191,9 @@
       .profile-card { align-items:flex-start; flex-direction:column; }
       .viewer-frame { height: 430px; }
       .nav-inner { padding-inline:.75rem; }
+      .brand small { display:none; }
+      .nav-clock { padding:.52rem .65rem; font-size:.78rem; }
+      .language-flags { min-width:auto; padding-inline:.7rem; }
     }
   </style>
 </head>
@@ -195,8 +214,9 @@
         <a href="#parcours" data-i18n="navJourney">Parcours</a>
         <a href="#contact" data-i18n="navContact">Contact</a>
       </div>
-      <div style="display:flex;gap:.55rem;align-items:center">
-        <button class="theme-btn" id="langToggle" type="button">🌐 FR</button>
+      <div class="nav-tools">
+        <span class="nav-clock" id="navClock">--:--:--</span>
+        <button class="theme-btn language-flags" id="langToggle" type="button" aria-label="Changer la langue">🇫🇷 FR <span class="flag-dim">🇬🇧</span></button>
         <button class="theme-btn" id="themeToggle" type="button">🎨 <span data-i18n="themesBtn">Thèmes</span></button>
         <button class="theme-btn mobile-menu" id="menuBtn">☰</button>
       </div>
@@ -238,11 +258,6 @@
           </div>
           <span class="tag" style="--x:#34d399;--y:#059669" data-i18n="availability">Disponible stage / alternance</span>
         </div>
-        <div class="local-widget panel panel-pad">
-          <span class="eyebrow" data-i18n="localTimeLabel">🕒 Heure locale</span>
-          <strong id="localTime" class="clock-time">--:--:--</strong>
-          <p id="localDate" class="clock-date">Chargement...</p>
-        </div>
         <div class="terminal">
           <div class="terminal-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
           <p class="cmd">$ whoami</p><p>theo-andre@portfolio-sisr</p>
@@ -256,13 +271,6 @@
         </div>
       </div>
     </section>
-
-    <div class="container stats">
-      <div class="panel stat reveal"><strong>Lite</strong><span>mode par défaut</span></div>
-      <div class="panel stat reveal"><strong>Direct</strong><span>prévisualisation immédiate</span></div>
-      <div class="panel stat reveal"><strong>2 stages</strong><span>intégrés dans le parcours</span></div>
-      <div class="panel stat reveal"><strong>Static</strong><span>HTML/CSS/JS simple</span></div>
-    </div>
 
     <section id="projets" class="container">
       <div class="section-head reveal"><span class="eyebrow" data-i18n="projectsEyebrow">🚀 Projets</span><h2 style="margin-top:1rem" data-i18n="projectsTitle">Projets réalisés</h2><p data-i18n="projectsText">Des projets orientés SISR : support, systèmes, réseaux, supervision, sauvegarde et cybersécurité.</p></div>
@@ -279,7 +287,7 @@
           <h3 id="viewerTitle" style="margin-top:.9rem">Sélectionne une ressource</h3>
           <p id="viewerDesc">Choisis un PDF, une image ou un fichier Excel dans la liste.</p>
           <div class="doc-actions">
-            <button class="preview-btn" id="previewBtn">👁️ <span data-i18n="reloadPreview">Recharger l’aperçu</span></button>
+            <button class="preview-btn" id="previewBtn" type="button">↗️ <span data-i18n="openPreview">Ouvrir en grand</span></button>
             <a class="download-btn" id="downloadBtn" href="#" download>⬇️ <span data-i18n="downloadBtn">Télécharger</span></a>
           </div>
           <div class="viewer-frame" id="viewerFrame"><div class="viewer-empty">Choisis un document dans la liste pour afficher son aperçu ici.</div></div>
@@ -328,10 +336,8 @@
     const docs = [
       {title:'CV Théo Andre 2025', type:'CV', file:'fichiers/cv-theo-andre-2025.pdf', kind:'pdf', desc:'CV professionnel à télécharger ou prévisualiser.'},
       {title:'Annexe E5 — Tableau de synthèse', type:'E5', file:'fichiers/annexe-e5-tableau-synthese.pdf', kind:'pdf', desc:'Version PDF du tableau de synthèse E5.'},
-      {title:'Annexe E5 — Excel', type:'E5', file:'fichiers/annexe-e5-tableau-synthese.xlsx', kind:'xlsx', desc:'Fichier Excel téléchargeable.'},
-      {title:'Attestation stage SIO1', type:'Stage', file:'fichiers/attestation-stage-sio1.pdf', kind:'pdf', desc:'Attestation de stage première période.'},
-      {title:'Attestation stage PDF', type:'Stage', file:'fichiers/attestation-stage.pdf', kind:'pdf', desc:'Attestation de stage en PDF.'},
-      {title:'Attestation stage image', type:'Stage', file:'fichiers/attestation-stage.jpeg', kind:'image', desc:'Attestation en format image.'},
+      {title:'Attestation de stage 1ère année', type:'Stage', file:'fichiers/attestation-stage-sio1.pdf', kind:'pdf', desc:'Attestation officielle du stage de première année.'},
+      {title:'Attestation de stage 2e année', type:'Stage', file:'fichiers/attestation-stage.pdf', kind:'pdf', desc:'Attestation officielle du stage de deuxième année.'},
       {title:'Présentation stage SIO2', type:'Stage', file:'fichiers/presentation-stage-sio2.pdf', kind:'pdf', desc:'Support de présentation de stage.'},
       {title:'Fiche switch TP9', type:'TP', file:'fichiers/fiche-switch-tp9.pdf', kind:'pdf', desc:'Fiche de configuration switch.'},
       {title:'FTP sécurisé', type:'TP', file:'fichiers/ftp-securise.pdf', kind:'pdf', desc:'Mise en place d’un service FTP sécurisé.'},
@@ -346,10 +352,10 @@
     ];
     const translations = {
       fr: {
-        brandSub:'BTS SIO SISR · Portfolio', navHome:'Accueil', navProjects:'Projets', navResources:'Ressources', navSkills:'Compétences', navJourney:'Parcours', navContact:'Contact', themesBtn:'Thèmes', themeTitle:'Ambiance', themeText:'Choisis un rendu plus propre, lisible et fluide.', heroEyebrow:'⚡ Portfolio BTS SIO option SISR', heroTitle:'Systèmes, réseaux & cybersécurité.', heroText:'Étudiant en BTS SIO option SISR, je présente ici mon parcours, mes projets d’infrastructure, mes stages, mes compétences techniques et mes preuves documentaires téléchargeables.', chipSys:'Administration systèmes', chipNet:'Réseaux', chipSupport:'Support', chipCyber:'Cybersécurité', chipDocs:'Documentation', seePdfs:'Voir les PDF', downloadCv:'Télécharger le CV', studentLabel:'Étudiant BTS SIO SISR', availability:'Disponible stage / alternance', localTimeLabel:'🕒 Heure locale', terminalGoal:'Construire une infrastructure fiable, documentée et sécurisée.', statLite:'mode fluide par défaut', statPreview:'prévisualisation immédiate', statStages:'intégrés dans le parcours', statLang:'langue dynamique', projectsEyebrow:'🚀 Projets', projectsTitle:'Projets réalisés', projectsText:'Des projets orientés SISR : support, systèmes, réseaux, supervision, sauvegarde et cybersécurité.', resourcesEyebrow:'📄 Ressources', resourcesTitle:'Prévisualisation & téléchargement', resourcesText:'Clique sur une ressource dans la liste : l’aperçu se charge directement à droite. Le bouton de téléchargement reste disponible pour chaque document.', reloadPreview:'Recharger l’aperçu', downloadBtn:'Télécharger', skillsEyebrow:'🧠 Compétences', skillsTitle:'Compétences techniques', skillsText:'Compétences principales mobilisées pendant la formation, les TP et les stages.', knowHow:'Savoir-faire', domainsTitle:'Domaines SISR', domainsText:'Cette section montre une vision recruteur : technologies, méthodes, documentation et exploitation.', journeyEyebrow:'🎓 Parcours', journeyTitle:'Parcours & expériences', journeyText:'Une timeline claire qui regroupe la progression scolaire, les deux périodes de stage et les compétences développées.', contactEyebrow:'📬 Contact', contactTitle:'Me contacter', contactText:'Un espace simple pour accéder rapidement au CV et aux liens professionnels.', contactBio:'Étudiant BTS SIO option SISR. Recherche de stage, alternance ou opportunité junior dans l’administration systèmes/réseaux.', professionalDocs:'Documents professionnels', professionalDocsText:'CV, attestations, annexes et supports techniques sont disponibles dans la section Ressources.', downloadMyCv:'Télécharger mon CV', footerText:'Portfolio statique, rapide et compatible GitHub Pages.', backTop:'Retour en haut'
+        brandSub:'BTS SIO SISR · Portfolio', navHome:'Accueil', navProjects:'Projets', navResources:'Ressources', navSkills:'Compétences', navJourney:'Parcours', navContact:'Contact', themesBtn:'Thèmes', themeTitle:'Ambiance', themeText:'Choisis un rendu plus propre, lisible et fluide.', heroEyebrow:'⚡ Portfolio BTS SIO option SISR', heroTitle:'Systèmes, réseaux & cybersécurité.', heroText:'Étudiant en BTS SIO option SISR, je présente ici mon parcours, mes projets d’infrastructure, mes stages, mes compétences techniques et mes preuves documentaires téléchargeables.', chipSys:'Administration systèmes', chipNet:'Réseaux', chipSupport:'Support', chipCyber:'Cybersécurité', chipDocs:'Documentation', seePdfs:'Voir les PDF', downloadCv:'Télécharger le CV', studentLabel:'Étudiant BTS SIO SISR', availability:'Disponible stage / alternance', localTimeLabel:'🕒 Heure locale', terminalGoal:'Construire une infrastructure fiable, documentée et sécurisée.', statLite:'mode fluide par défaut', statPreview:'prévisualisation immédiate', statStages:'intégrés dans le parcours', statLang:'langue dynamique', projectsEyebrow:'🚀 Projets', projectsTitle:'Projets réalisés', projectsText:'Des projets orientés SISR : support, systèmes, réseaux, supervision, sauvegarde et cybersécurité.', resourcesEyebrow:'📄 Ressources', resourcesTitle:'Prévisualisation & téléchargement', resourcesText:'Clique sur une ressource dans la liste : l’aperçu se charge directement à droite. Le bouton de téléchargement reste disponible pour chaque document.', openPreview:'Ouvrir en grand', downloadBtn:'Télécharger', skillsEyebrow:'🧠 Compétences', skillsTitle:'Compétences techniques', skillsText:'Compétences principales mobilisées pendant la formation, les TP et les stages.', knowHow:'Savoir-faire', domainsTitle:'Domaines SISR', domainsText:'Cette section montre une vision recruteur : technologies, méthodes, documentation et exploitation.', journeyEyebrow:'🎓 Parcours', journeyTitle:'Parcours & expériences', journeyText:'Une timeline claire qui regroupe la progression scolaire, les deux périodes de stage et les compétences développées.', contactEyebrow:'📬 Contact', contactTitle:'Me contacter', contactText:'Un espace simple pour accéder rapidement au CV et aux liens professionnels.', contactBio:'Étudiant BTS SIO option SISR. Recherche de stage, alternance ou opportunité junior dans l’administration systèmes/réseaux.', professionalDocs:'Documents professionnels', professionalDocsText:'CV, attestations, annexes et supports techniques sont disponibles dans la section Ressources.', downloadMyCv:'Télécharger mon CV', footerText:'Portfolio statique, rapide et compatible GitHub Pages.', backTop:'Retour en haut'
       },
       en: {
-        brandSub:'BTS SIO SISR · Portfolio', navHome:'Home', navProjects:'Projects', navResources:'Resources', navSkills:'Skills', navJourney:'Journey', navContact:'Contact', themesBtn:'Themes', themeTitle:'Visual theme', themeText:'Choose a cleaner, readable and smooth visual style.', heroEyebrow:'⚡ BTS SIO SISR portfolio', heroTitle:'Systems, networks & cybersecurity.', heroText:'BTS SIO SISR student presenting my journey, infrastructure projects, internships, technical skills and downloadable professional documents.', chipSys:'Systems administration', chipNet:'Networks', chipSupport:'Support', chipCyber:'Cybersecurity', chipDocs:'Documentation', seePdfs:'View PDFs', downloadCv:'Download CV', studentLabel:'BTS SIO SISR student', availability:'Available for internship / apprenticeship', localTimeLabel:'🕒 Local time', terminalGoal:'Build reliable, documented and secure infrastructure.', statLite:'smooth mode by default', statPreview:'instant preview', statStages:'included in the journey', statLang:'dynamic language', projectsEyebrow:'🚀 Projects', projectsTitle:'Completed projects', projectsText:'SISR-oriented projects: support, systems, networks, monitoring, backup and cybersecurity.', resourcesEyebrow:'📄 Resources', resourcesTitle:'Preview & download', resourcesText:'Click a resource in the list: the preview opens directly on the right. The download button remains available for every file.', reloadPreview:'Reload preview', downloadBtn:'Download', skillsEyebrow:'🧠 Skills', skillsTitle:'Technical skills', skillsText:'Main skills used during training, practical work and internships.', knowHow:'Know-how', domainsTitle:'SISR areas', domainsText:'This section gives a recruiter-friendly view: technologies, methods, documentation and operations.', journeyEyebrow:'🎓 Journey', journeyTitle:'Journey & experience', journeyText:'A clear timeline showing academic progress, internships and developed skills.', contactEyebrow:'📬 Contact', contactTitle:'Contact me', contactText:'A simple area to access the CV and professional links quickly.', contactBio:'BTS SIO SISR student looking for an internship, apprenticeship or junior opportunity in systems/network administration.', professionalDocs:'Professional documents', professionalDocsText:'CV, internship certificates, annexes and technical resources are available in the Resources section.', downloadMyCv:'Download my CV', footerText:'Fast static portfolio compatible with GitHub Pages.', backTop:'Back to top'
+        brandSub:'BTS SIO SISR · Portfolio', navHome:'Home', navProjects:'Projects', navResources:'Resources', navSkills:'Skills', navJourney:'Journey', navContact:'Contact', themesBtn:'Themes', themeTitle:'Visual theme', themeText:'Choose a cleaner, readable and smooth visual style.', heroEyebrow:'⚡ BTS SIO SISR portfolio', heroTitle:'Systems, networks & cybersecurity.', heroText:'BTS SIO SISR student presenting my journey, infrastructure projects, internships, technical skills and downloadable professional documents.', chipSys:'Systems administration', chipNet:'Networks', chipSupport:'Support', chipCyber:'Cybersecurity', chipDocs:'Documentation', seePdfs:'View PDFs', downloadCv:'Download CV', studentLabel:'BTS SIO SISR student', availability:'Available for internship / apprenticeship', localTimeLabel:'🕒 Local time', terminalGoal:'Build reliable, documented and secure infrastructure.', statLite:'smooth mode by default', statPreview:'instant preview', statStages:'included in the journey', statLang:'dynamic language', projectsEyebrow:'🚀 Projects', projectsTitle:'Completed projects', projectsText:'SISR-oriented projects: support, systems, networks, monitoring, backup and cybersecurity.', resourcesEyebrow:'📄 Resources', resourcesTitle:'Preview & download', resourcesText:'Click a resource in the list: the preview opens directly on the right. The download button remains available for every file.', openPreview:'Open full preview', downloadBtn:'Download', skillsEyebrow:'🧠 Skills', skillsTitle:'Technical skills', skillsText:'Main skills used during training, practical work and internships.', knowHow:'Know-how', domainsTitle:'SISR areas', domainsText:'This section gives a recruiter-friendly view: technologies, methods, documentation and operations.', journeyEyebrow:'🎓 Journey', journeyTitle:'Journey & experience', journeyText:'A clear timeline showing academic progress, internships and developed skills.', contactEyebrow:'📬 Contact', contactTitle:'Contact me', contactText:'A simple area to access the CV and professional links quickly.', contactBio:'BTS SIO SISR student looking for an internship, apprenticeship or junior opportunity in systems/network administration.', professionalDocs:'Professional documents', professionalDocsText:'CV, internship certificates, annexes and technical resources are available in the Resources section.', downloadMyCv:'Download my CV', footerText:'Fast static portfolio compatible with GitHub Pages.', backTop:'Back to top'
       }
     };
     let currentLang = localStorage.getItem('lang') || 'fr';
@@ -404,7 +410,7 @@
         frame.innerHTML = `<object data="${selectedDoc.file}#toolbar=0&navpanes=0&scrollbar=1" type="application/pdf" width="100%" height="100%"><iframe src="${selectedDoc.file}#toolbar=0&navpanes=0" title="${selectedDoc.title}"></iframe><div class="viewer-empty">L’aperçu intégré n’est pas disponible sur ce navigateur.<br/><a href="${selectedDoc.file}" target="_blank" rel="noopener">Ouvrir le PDF</a></div></object>`;
       }
       else if(selectedDoc.kind==='image') frame.innerHTML = `<img src="${selectedDoc.file}" alt="${selectedDoc.title}">`;
-      else frame.innerHTML = '<div class="viewer-empty">Ce fichier ne se prévisualise pas directement dans le navigateur.<br/>Utilise le bouton Télécharger pour l’ouvrir localement.</div>';
+      else frame.innerHTML = '<div class="viewer-empty">Aperçu non disponible pour ce type de fichier.<br/>Utilise le bouton Télécharger.</div>';
     }
     function renderSkills(){
       document.getElementById('skillsBox').innerHTML = skills.map(([name,val])=>`<div class="skill-row"><div class="skill-head"><span>${name}</span><span>${val}%</span></div><div class="bar"><span style="--v:${val}%"></span></div></div>`).join('');
@@ -425,27 +431,26 @@
       });
       const langBtn = document.getElementById('langToggle');
       if(langBtn) {
-        langBtn.textContent = currentLang === 'fr' ? '🌐 FR' : '🌐 EN';
+        langBtn.innerHTML = currentLang === 'fr' ? '🇫🇷 FR <span class="flag-dim">🇬🇧</span>' : '🇬🇧 EN <span class="flag-dim">🇫🇷</span>';
         langBtn.classList.add('lang-pulse');
         setTimeout(()=>langBtn.classList.remove('lang-pulse'), 220);
       }
       updateClock();
     }
     function updateClock(){
-      const timeBox = document.getElementById('localTime');
-      const dateBox = document.getElementById('localDate');
-      if(!timeBox || !dateBox) return;
+      const clock = document.getElementById('navClock');
+      if(!clock) return;
       const now = new Date();
       const locale = currentLang === 'fr' ? 'fr-FR' : 'en-GB';
-      timeBox.textContent = now.toLocaleTimeString(locale, {hour:'2-digit', minute:'2-digit', second:'2-digit'});
-      dateBox.textContent = now.toLocaleDateString(locale, {weekday:'long', day:'2-digit', month:'long', year:'numeric'});
+      clock.textContent = now.toLocaleTimeString(locale, {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+      clock.title = now.toLocaleDateString(locale, {weekday:'long', day:'2-digit', month:'long', year:'numeric'});
     }
 
     document.getElementById('themeToggle').onclick=()=>document.getElementById('themePanel').classList.toggle('open');
     document.getElementById('menuBtn').onclick=()=>document.getElementById('nav').classList.toggle('open');
     document.querySelectorAll('[data-theme-choice]').forEach(b=>b.onclick=()=>{ document.body.dataset.theme=b.dataset.themeChoice; localStorage.setItem('theme',b.dataset.themeChoice); });
     document.getElementById('langToggle').onclick=()=>{ currentLang = currentLang === 'fr' ? 'en' : 'fr'; localStorage.setItem('lang', currentLang); applyLanguage(); };
-    document.getElementById('previewBtn').onclick=()=>updateViewer(true);
+    document.getElementById('previewBtn').onclick=()=>window.open(selectedDoc.file, '_blank', 'noopener');
     const savedTheme = localStorage.getItem('theme');
     document.body.dataset.theme = ['obsidian','ocean','forest','light','redteam'].includes(savedTheme) ? savedTheme : 'obsidian';
     applyLanguage(); updateClock(); setInterval(updateClock, 1000); renderProjects(); renderFilters(); renderDocs(); updateViewer(true); renderSkills(); renderTimeline(); reveal(); progress(); activeNav();
