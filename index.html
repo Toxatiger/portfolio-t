@@ -147,10 +147,6 @@
     .viewer-frame iframe, .viewer-frame img { width:100%; height:100%; border:0; object-fit:contain; background:white; }
     .viewer-empty { max-width: 420px; text-align:center; padding:2rem; color:var(--muted); }
 
-    .oral-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:1rem; }
-    .oral-card { min-height: 245px; }
-    .quote-script { margin-top:1.2rem; border-color: color-mix(in srgb, var(--a) 45%, var(--border)); }
-    .quote-script p { font-size:1.05rem; line-height:1.85; }
     .contact-box { display:grid; grid-template-columns: 1fr 1fr; gap:1.2rem; }
     .mobile-menu { display:none; }
     .theme-panel { position:fixed; right:1rem; top:5.2rem; z-index:70; width:min(360px, calc(100vw - 2rem)); padding:1rem; display:none; }
@@ -175,6 +171,17 @@
     .viewer-frame object { width:100%; height:100%; }
     .project-top::after { content:""; position:absolute; width:14rem; height:14rem; border-radius:50%; background:radial-gradient(circle, color-mix(in srgb, var(--a) 22%, transparent), transparent 70%); animation: orbMove 8s ease-in-out infinite; }
 
+    .tp-showcase { display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem; }
+    .tp-card { min-height: 230px; display:flex; flex-direction:column; justify-content:space-between; isolation:isolate; }
+    .tp-card::after { content:""; position:absolute; inset:auto -20% -35% -20%; height:9rem; background:radial-gradient(circle, color-mix(in srgb, var(--a) 24%, transparent), transparent 70%); filter:blur(10px); opacity:.7; z-index:-1; transition:.35s ease; }
+    .tp-card:hover::after { transform:translateY(-16px) scale(1.15); opacity:1; }
+    .tp-icon { display:grid; place-items:center; width:3rem; height:3rem; border-radius:1rem; color:var(--bg); background:linear-gradient(135deg,var(--a),var(--b)); box-shadow:0 18px 46px var(--shadow); animation: logoFloat 5s ease-in-out infinite; }
+    .resource-meta { display:flex; flex-wrap:wrap; gap:.45rem; margin-top:.8rem; }
+    .doc-card { overflow:hidden; }
+    .doc-card::after { content:""; position:absolute; top:0; right:-35%; width:55%; height:100%; background:linear-gradient(90deg,transparent,color-mix(in srgb, var(--a) 9%, transparent),transparent); transform:skewX(-18deg); opacity:0; transition:.32s ease; }
+    .doc-card:hover::after, .doc-card.active::after { right:115%; opacity:1; transition-duration:.78s; }
+    .viewer-frame object, .viewer-frame iframe { width:100%; height:100%; border:0; background:white; }
+
     @keyframes gradient { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
     @keyframes logoFloat { 0%,100% { transform:translateY(0) rotate(0deg); } 50% { transform:translateY(-3px) rotate(-2deg); } }
     @keyframes softAppear { from { opacity:.0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
@@ -182,7 +189,7 @@
     @keyframes orbMove { 0%,100% { transform:translate(-40%, -30%) scale(.9); } 50% { transform:translate(35%, 20%) scale(1.12); } }
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
     @media (max-width: 980px) {
-      .hero, .doc-layout, .contact-box, .oral-grid { grid-template-columns: 1fr; }
+      .hero, .doc-layout, .contact-box, .tp-showcase { grid-template-columns: 1fr; }
       .stats, .grid-3, .grid-2 { grid-template-columns: 1fr 1fr; }
       .viewer { position:relative; top:0; }
       .nav-links { display:none; }
@@ -217,7 +224,7 @@
         <a href="#ressources" data-i18n="navResources">Ressources</a>
         <a href="#competences" data-i18n="navSkills">Compétences</a>
         <a href="#parcours" data-i18n="navJourney">Parcours</a>
-        <a href="#oral" data-i18n="navOral">Oral</a>
+        <a href="#procedures" data-i18n="navTp">TP</a>
         <a href="#contact" data-i18n="navContact">Contact</a>
       </div>
       <div class="nav-tools">
@@ -271,7 +278,7 @@
           <p class="cmd">$ goal</p><p data-i18n="terminalGoal">Construire une infrastructure fiable, documentée et sécurisée.</p>
         </div>
         <div class="grid grid-3">
-          <div class="panel panel-pad"><strong>14</strong><p>ressources intégrées</p></div>
+          <div class="panel panel-pad"><strong id="resourceCount">--</strong><p>ressources intégrées</p></div>
           <div class="panel panel-pad"><strong>6</strong><p>projets détaillés</p></div>
           <div class="panel panel-pad"><strong>2</strong><p>périodes de stage valorisées</p></div>
         </div>
@@ -283,8 +290,13 @@
       <div class="grid grid-3" id="projectsGrid"></div>
     </section>
 
+    <section id="procedures" class="container">
+      <div class="section-head reveal"><span class="eyebrow" data-i18n="tpEyebrow">🧪 Procédures TP</span><h2 style="margin-top:1rem" data-i18n="tpTitle">Procédures techniques réalisées</h2><p data-i18n="tpText">Les procédures sont intégrées comme preuves techniques : haute disponibilité, OpenVPN, Active Directory, Nagios, FTP sécurisé et intégration Linux/MariaDB.</p></div>
+      <div class="tp-showcase" id="tpShowcase"></div>
+    </section>
+
     <section id="ressources" class="container">
-      <div class="section-head reveal"><span class="eyebrow" data-i18n="resourcesEyebrow">📄 Ressources</span><h2 style="margin-top:1rem" data-i18n="resourcesTitle">Prévisualisation & téléchargement</h2><p data-i18n="resourcesText">Clique sur une ressource dans la liste : l’aperçu se charge directement à droite. Le bouton de téléchargement reste disponible pour chaque document.</p></div>
+      <div class="section-head reveal"><span class="eyebrow" data-i18n="resourcesEyebrow">📄 Ressources</span><h2 style="margin-top:1rem" data-i18n="resourcesTitle">Prévisualisation & téléchargement</h2><p data-i18n="resourcesText">Clique sur une ressource : l’aperçu s’affiche directement à droite. Les procédures TP, rapports, attestations et annexes restent téléchargeables.</p></div>
       <div class="filters" id="docFilters"></div>
       <div class="doc-layout">
         <div class="doc-list" id="docList"></div>
@@ -313,44 +325,11 @@
       <div class="section-head reveal"><span class="eyebrow" data-i18n="journeyEyebrow">🎓 Parcours</span><h2 style="margin-top:1rem" data-i18n="journeyTitle">Parcours & expériences</h2><p data-i18n="journeyText">Une timeline claire qui regroupe la progression scolaire, les deux périodes de stage et les compétences développées.</p></div>
       <div class="timeline" id="timeline"></div>
     </section>
-
-
-
-    <section id="oral" class="container">
-      <div class="section-head reveal"><span class="eyebrow" data-i18n="oralEyebrow">🎤 Préparation oral</span><h2 style="margin-top:1rem" data-i18n="oralTitle">Script court pour l’épreuve</h2><p data-i18n="oralText">Les examinateurs peuvent s’appuyer sur le tableau de synthèse E5 : cette partie t’aide à faire le lien entre le tableau, tes stages et tes preuves.</p></div>
-      <div class="oral-grid">
-        <article class="panel panel-pad reveal oral-card">
-          <span class="tag" style="--x:#38bdf8;--y:#2563eb">1 min</span>
-          <h3>Introduction</h3>
-          <p>Bonjour, je m’appelle Théo Andre, je suis étudiant en BTS SIO option SISR. Mon portfolio regroupe mon parcours, mes projets, mes stages et les documents qui justifient les compétences de mon tableau de synthèse E5.</p>
-        </article>
-        <article class="panel panel-pad reveal oral-card">
-          <span class="tag" style="--x:#34d399;--y:#059669">Stage 1</span>
-          <h3>Fédération des Centres Sociaux</h3>
-          <p>Pour ma première période, j’ai travaillé sur la sensibilisation à la cybersécurité, la maintenance réseau, la baie de brassage, WordPress et la recherche d’un vidéoprojecteur. Je peux relier ces missions à la documentation, au support utilisateur et à la sécurisation des usages numériques.</p>
-        </article>
-        <article class="panel panel-pad reveal oral-card">
-          <span class="tag" style="--x:#f97316;--y:#f43f5e">Stage 2</span>
-          <h3>École de conduite Roulez Jeunesse</h3>
-          <p>Pour ma deuxième période, j’ai vérifié les sauvegardes OneDrive, la maintenance des postes, le système de vidéosurveillance, les paramètres de sécurité et le site internet. Ces missions montrent ma capacité à contrôler, sécuriser et documenter un environnement réel.</p>
-        </article>
-        <article class="panel panel-pad reveal oral-card">
-          <span class="tag" style="--x:#a78bfa;--y:#7c3aed">E5</span>
-          <h3>Comment répondre au jury</h3>
-          <p>Si on me demande une preuve, je pars du tableau E5, je donne l’activité concernée, j’ouvre le document correspondant dans la section Ressources, puis j’explique : le contexte, ce que j’ai fait, l’outil utilisé, la difficulté rencontrée et le résultat obtenu.</p>
-        </article>
-      </div>
-      <div class="panel panel-pad reveal quote-script">
-        <h3>Script prêt à dire</h3>
-        <p>« Pour présenter mon dossier, je vais partir du tableau de synthèse. Chaque activité du tableau correspond à une situation concrète que j’ai vécue ou réalisée : soit en stage, soit en TP, soit dans un projet. Par exemple, en SIO1 j’ai travaillé sur la sensibilisation à la cybersécurité et la maintenance réseau à la Fédération des Centres Sociaux. En SIO2, chez Roulez Jeunesse, j’ai travaillé sur les sauvegardes OneDrive, la maintenance des postes, la vidéosurveillance, la sécurité et le site internet. Pour chaque compétence, je peux ouvrir la preuve dans mon portfolio, expliquer le contexte, l’action réalisée, les outils utilisés et ce que cela m’a apporté professionnellement. »</p>
-      </div>
-    </section>
-
     <section id="contact" class="container">
       <div class="section-head reveal"><span class="eyebrow" data-i18n="contactEyebrow">📬 Contact</span><h2 style="margin-top:1rem" data-i18n="contactTitle">Me contacter</h2><p data-i18n="contactText">Un espace simple pour accéder rapidement au CV et aux liens professionnels.</p></div>
       <div class="contact-box">
         <div class="panel panel-pad reveal"><h3>Théo Andre</h3><p data-i18n="contactBio">Étudiant BTS SIO option SISR. Recherche de stage, alternance ou opportunité junior dans l’administration systèmes/réseaux.</p><div class="chips"><a class="chip" href="mailto:theo.andre@email.com">Email</a><a class="chip" href="#">GitHub</a><a class="chip" href="#">LinkedIn</a></div></div>
-        <div class="panel panel-pad reveal"><h3 data-i18n="professionalDocs">Documents professionnels</h3><p data-i18n="professionalDocsText">CV, attestations, annexes et supports techniques sont disponibles dans la section Ressources.</p><a class="primary-btn" href="fichiers/cv-theo-andre-2025.pdf" download data-i18n="downloadMyCv">Télécharger mon CV</a></div>
+        <div class="panel panel-pad reveal"><h3 data-i18n="professionalDocs">Documents professionnels</h3><p data-i18n="professionalDocsText">CV, attestations, annexes, rapports et procédures TP sont disponibles dans la section Ressources.</p><a class="primary-btn" href="fichiers/cv-theo-andre-2025.pdf" download data-i18n="downloadMyCv">Télécharger mon CV</a></div>
       </div>
     </section>
   </main>
@@ -374,16 +353,21 @@
     const docs = [
       {title:'CV Théo Andre 2025', type:'CV', file:'fichiers/cv-theo-andre-2025.pdf', kind:'pdf', desc:'CV professionnel à télécharger ou prévisualiser.'},
       {title:'Annexe E5 — Tableau de synthèse', type:'E5', file:'fichiers/annexe-e5-tableau-synthese.pdf', kind:'pdf', desc:'Version PDF du tableau de synthèse E5.'},
-      {title:'Rapport de stage 1ère année — Centres Sociaux', type:'Stage', file:'fichiers/rapport-stage-sio1-centres-sociaux.pdf', kind:'pdf', desc:'Rapport SIO1 : sensibilisation cybersécurité, baie de brassage, WordPress et vidéoprojecteur.'},
+      {title:'Rapport de stage 1ère année — Centres Sociaux', type:'Stage', file:'fichiers/rapport-stage-sio1-centres-sociaux.pdf', kind:'pdf', desc:'Rapport SIO1 : cybersécurité, baie de brassage, WordPress et vidéoprojecteur.'},
       {title:'Rapport de stage 2e année — Roulez Jeunesse', type:'Stage', file:'fichiers/rapport-stage-sio2-roulez-jeunesse.pdf', kind:'pdf', desc:'Rapport SIO2 : sauvegardes OneDrive, maintenance postes, vidéosurveillance, sécurité et site web.'},
       {title:'Attestation de stage 1ère année', type:'Stage', file:'fichiers/attestation-stage-sio1.pdf', kind:'pdf', desc:'Attestation officielle du stage de première année.'},
       {title:'Attestation de stage 2e année', type:'Stage', file:'fichiers/attestation-stage.pdf', kind:'pdf', desc:'Attestation officielle du stage de deuxième année.'},
       {title:'Présentation stage SIO2', type:'Stage', file:'fichiers/presentation-stage-sio2.pdf', kind:'pdf', desc:'Support de présentation de stage.'},
+      {title:'Procédure haute disponibilité — Heartbeat, DRBD, Apache', type:'Procédure TP', file:'fichiers/procedure-haute-disponibilite-heartbeat-drbd-apache.pdf', kind:'pdf', desc:'Cluster Linux avec réplication DRBD, IP virtuelle Heartbeat, Apache et tests de failover.', featured:true},
+      {title:'Procédure pfSense — VPN OpenVPN', type:'Procédure TP', file:'fichiers/procedure-pfsense-openvpn.pdf', kind:'pdf', desc:'Configuration pfSense : CA, certificat utilisateur, serveur OpenVPN, règles et connexion client.', featured:true},
+      {title:'Procédure intégration Client Linux au domaine AD', type:'Procédure TP', file:'fichiers/procedure-integration-client-linux-ad.pdf', kind:'pdf', desc:'Intégration Ubuntu au domaine Active Directory : IP, hostname, paquets, DNS, realm et tests.', featured:true},
+      {title:'Procédure FTP sécurisé — ProFTPD SSL/TLS', type:'Procédure TP', file:'fichiers/procedure-securisation-ftp-proftpd-tls.pdf', kind:'pdf', desc:'Serveur FTP sécurisé avec ProFTPD, certificats SSL/TLS, restriction utilisateur et test FileZilla.', featured:true},
+      {title:'Procédure Nagios Core sous Docker', type:'Procédure TP', file:'fichiers/procedure-nagios-core-docker.pdf', kind:'pdf', desc:'Déploiement Nagios Core avec Docker Desktop, docker-compose, configuration et vérification.', featured:true},
+      {title:'Procédure TP2 — Comptes et groupes Active Directory', type:'Procédure TP', file:'fichiers/procedure-tp2-active-directory-comptes-groupes.pdf', kind:'pdf', desc:'Création d’OU, comptes, groupes, partage homes et profils itinérants dans Active Directory.', featured:true},
+      {title:'Procédure MariaDB — intégration au domaine AD', type:'Procédure TP', file:'fichiers/procedure-mariadb-integration-ad.pdf', kind:'pdf', desc:'Serveur Ubuntu/MariaDB intégré au domaine AD : hostname, IP statique, paquets, realm et PAM.', featured:true},
       {title:'Fiche switch TP9', type:'TP', file:'fichiers/fiche-switch-tp9.pdf', kind:'pdf', desc:'Fiche de configuration switch.'},
-      {title:'FTP sécurisé', type:'TP', file:'fichiers/ftp-securise.pdf', kind:'pdf', desc:'Mise en place d’un service FTP sécurisé.'},
       {title:'Mission E — Snort', type:'Cybersécurité', file:'fichiers/mission-e-snort-theo-andre.pdf', kind:'pdf', desc:'Mission autour de Snort et de la détection.'},
       {title:'Procédure complète TP4', type:'TP', file:'fichiers/procedure-complete-tp4.pdf', kind:'pdf', desc:'Procédure technique détaillée.'},
-      {title:'TP2 — AD comptes/groupes', type:'TP', file:'fichiers/tp2-ad-compte-groupe.pdf', kind:'pdf', desc:'Travail Active Directory sur comptes et groupes.'},
       {title:'TP4 — FTP User MySQL', type:'TP', file:'fichiers/tp4-ftp-user-mysql.pdf', kind:'pdf', desc:'FTP avec utilisateur et base MySQL.'},
       {title:'Veille informatique', type:'Veille', file:'fichiers/veille-info.pdf', kind:'pdf', desc:'Document de veille technologique.'}
     ];
@@ -392,10 +376,10 @@
     ];
     const translations = {
       fr: {
-        brandSub:'BTS SIO SISR · Portfolio', navHome:'Accueil', navProjects:'Projets', navResources:'Ressources', navSkills:'Compétences', navJourney:'Parcours', navOral:'Oral', navContact:'Contact', themesBtn:'Thèmes', themeTitle:'Ambiance', themeText:'Choisis un rendu plus propre, lisible et fluide.', heroEyebrow:'⚡ Portfolio BTS SIO option SISR', heroTitle:'Systèmes, réseaux & cybersécurité.', heroText:'Étudiant en BTS SIO option SISR, je présente ici mon parcours, mes projets d’infrastructure, mes stages, mes compétences techniques et mes preuves documentaires téléchargeables.', chipSys:'Administration systèmes', chipNet:'Réseaux', chipSupport:'Support', chipCyber:'Cybersécurité', chipDocs:'Documentation', seePdfs:'Voir les PDF', downloadCv:'Télécharger le CV', studentLabel:'Étudiant BTS SIO SISR', availability:'Disponible stage / alternance', localTimeLabel:'🕒 Heure locale', terminalGoal:'Construire une infrastructure fiable, documentée et sécurisée.', statLite:'mode fluide par défaut', statPreview:'prévisualisation immédiate', statStages:'intégrés dans le parcours', statLang:'langue dynamique', projectsEyebrow:'🚀 Projets', projectsTitle:'Projets réalisés', projectsText:'Des projets orientés SISR : support, systèmes, réseaux, supervision, sauvegarde et cybersécurité.', resourcesEyebrow:'📄 Ressources', resourcesTitle:'Prévisualisation & téléchargement', resourcesText:'Clique sur une ressource dans la liste : l’aperçu se charge directement à droite. Le bouton de téléchargement reste disponible pour chaque document.', openPreview:'Ouvrir en grand', downloadBtn:'Télécharger', skillsEyebrow:'🧠 Compétences', skillsTitle:'Compétences techniques', skillsText:'Compétences principales mobilisées pendant la formation, les TP et les stages.', knowHow:'Savoir-faire', domainsTitle:'Domaines SISR', domainsText:'Cette section montre une vision recruteur : technologies, méthodes, documentation et exploitation.', journeyEyebrow:'🎓 Parcours', journeyTitle:'Parcours & expériences', journeyText:'Une timeline claire qui regroupe la progression scolaire, les deux périodes de stage et les compétences développées.', oralEyebrow:'🎤 Préparation oral', oralTitle:'Script court pour l’épreuve', oralText:'Les examinateurs peuvent s’appuyer sur le tableau de synthèse E5 : cette partie t’aide à faire le lien entre le tableau, tes stages et tes preuves.', contactEyebrow:'📬 Contact', contactTitle:'Me contacter', contactText:'Un espace simple pour accéder rapidement au CV et aux liens professionnels.', contactBio:'Étudiant BTS SIO option SISR. Recherche de stage, alternance ou opportunité junior dans l’administration systèmes/réseaux.', professionalDocs:'Documents professionnels', professionalDocsText:'CV, attestations, annexes et supports techniques sont disponibles dans la section Ressources.', downloadMyCv:'Télécharger mon CV', footerText:'Portfolio statique, rapide et compatible GitHub Pages.', backTop:'Retour en haut'
+        brandSub:'BTS SIO SISR · Portfolio', navHome:'Accueil', navProjects:'Projets', navResources:'Ressources', navSkills:'Compétences', navJourney:'Parcours', navTp:'TP', navContact:'Contact', themesBtn:'Thèmes', themeTitle:'Ambiance', themeText:'Choisis un rendu plus propre, lisible et fluide.', heroEyebrow:'⚡ Portfolio BTS SIO option SISR', heroTitle:'Systèmes, réseaux & cybersécurité.', heroText:'Étudiant en BTS SIO option SISR, je présente ici mon parcours, mes projets d’infrastructure, mes stages, mes compétences techniques et mes preuves documentaires téléchargeables.', chipSys:'Administration systèmes', chipNet:'Réseaux', chipSupport:'Support', chipCyber:'Cybersécurité', chipDocs:'Documentation', seePdfs:'Voir les PDF', downloadCv:'Télécharger le CV', studentLabel:'Étudiant BTS SIO SISR', availability:'Disponible stage / alternance', localTimeLabel:'🕒 Heure locale', terminalGoal:'Construire une infrastructure fiable, documentée et sécurisée.', statLite:'mode fluide par défaut', statPreview:'prévisualisation immédiate', statStages:'intégrés dans le parcours', statLang:'langue dynamique', projectsEyebrow:'🚀 Projets', projectsTitle:'Projets réalisés', projectsText:'Des projets orientés SISR : support, systèmes, réseaux, supervision, sauvegarde et cybersécurité.', tpEyebrow:'🧪 Procédures TP', tpTitle:'Procédures techniques réalisées', tpText:'Les procédures sont intégrées comme preuves techniques : haute disponibilité, OpenVPN, Active Directory, Nagios, FTP sécurisé et intégration Linux/MariaDB.', resourcesEyebrow:'📄 Ressources', resourcesTitle:'Prévisualisation & téléchargement', resourcesText:'Clique sur une ressource : l’aperçu s’affiche directement à droite. Les procédures TP, rapports, attestations et annexes restent téléchargeables.', openPreview:'Ouvrir en grand', downloadBtn:'Télécharger', skillsEyebrow:'🧠 Compétences', skillsTitle:'Compétences techniques', skillsText:'Compétences principales mobilisées pendant la formation, les TP et les stages.', knowHow:'Savoir-faire', domainsTitle:'Domaines SISR', domainsText:'Cette section montre une vision recruteur : technologies, méthodes, documentation et exploitation.', journeyEyebrow:'🎓 Parcours', journeyTitle:'Parcours & expériences', journeyText:'Une timeline claire qui regroupe la progression scolaire, les deux périodes de stage et les compétences développées.', contactEyebrow:'📬 Contact', contactTitle:'Me contacter', contactText:'Un espace simple pour accéder rapidement au CV et aux liens professionnels.', contactBio:'Étudiant BTS SIO option SISR. Recherche de stage, alternance ou opportunité junior dans l’administration systèmes/réseaux.', professionalDocs:'Documents professionnels', professionalDocsText:'CV, attestations, annexes, rapports et procédures TP sont disponibles dans la section Ressources.', downloadMyCv:'Télécharger mon CV', footerText:'Portfolio statique, rapide et compatible GitHub Pages.', backTop:'Retour en haut'
       },
       en: {
-        brandSub:'BTS SIO SISR · Portfolio', navHome:'Home', navProjects:'Projects', navResources:'Resources', navSkills:'Skills', navJourney:'Journey', navOral:'Oral', navContact:'Contact', themesBtn:'Themes', themeTitle:'Visual theme', themeText:'Choose a cleaner, readable and smooth visual style.', heroEyebrow:'⚡ BTS SIO SISR portfolio', heroTitle:'Systems, networks & cybersecurity.', heroText:'BTS SIO SISR student presenting my journey, infrastructure projects, internships, technical skills and downloadable professional documents.', chipSys:'Systems administration', chipNet:'Networks', chipSupport:'Support', chipCyber:'Cybersecurity', chipDocs:'Documentation', seePdfs:'View PDFs', downloadCv:'Download CV', studentLabel:'BTS SIO SISR student', availability:'Available for internship / apprenticeship', localTimeLabel:'🕒 Local time', terminalGoal:'Build reliable, documented and secure infrastructure.', statLite:'smooth mode by default', statPreview:'instant preview', statStages:'included in the journey', statLang:'dynamic language', projectsEyebrow:'🚀 Projects', projectsTitle:'Completed projects', projectsText:'SISR-oriented projects: support, systems, networks, monitoring, backup and cybersecurity.', resourcesEyebrow:'📄 Resources', resourcesTitle:'Preview & download', resourcesText:'Click a resource in the list: the preview opens directly on the right. The download button remains available for every file.', openPreview:'Open full preview', downloadBtn:'Download', skillsEyebrow:'🧠 Skills', skillsTitle:'Technical skills', skillsText:'Main skills used during training, practical work and internships.', knowHow:'Know-how', domainsTitle:'SISR areas', domainsText:'This section gives a recruiter-friendly view: technologies, methods, documentation and operations.', journeyEyebrow:'🎓 Journey', journeyTitle:'Journey & experience', journeyText:'A clear timeline showing academic progress, internships and developed skills.', oralEyebrow:'🎤 Oral preparation', oralTitle:'Short exam script', oralText:'The examiners may use the E5 summary table: this section helps connect the table, internships and evidence.', contactEyebrow:'📬 Contact', contactTitle:'Contact me', contactText:'A simple area to access the CV and professional links quickly.', contactBio:'BTS SIO SISR student looking for an internship, apprenticeship or junior opportunity in systems/network administration.', professionalDocs:'Professional documents', professionalDocsText:'CV, internship certificates, annexes and technical resources are available in the Resources section.', downloadMyCv:'Download my CV', footerText:'Fast static portfolio compatible with GitHub Pages.', backTop:'Back to top'
+        brandSub:'BTS SIO SISR · Portfolio', navHome:'Home', navProjects:'Projects', navResources:'Resources', navSkills:'Skills', navJourney:'Journey', navTp:'TP', navContact:'Contact', themesBtn:'Themes', themeTitle:'Visual theme', themeText:'Choose a cleaner, readable and smooth visual style.', heroEyebrow:'⚡ BTS SIO SISR portfolio', heroTitle:'Systems, networks & cybersecurity.', heroText:'BTS SIO SISR student presenting my journey, infrastructure projects, internships, technical skills and downloadable professional documents.', chipSys:'Systems administration', chipNet:'Networks', chipSupport:'Support', chipCyber:'Cybersecurity', chipDocs:'Documentation', seePdfs:'View PDFs', downloadCv:'Download CV', studentLabel:'BTS SIO SISR student', availability:'Available for internship / apprenticeship', localTimeLabel:'🕒 Local time', terminalGoal:'Build reliable, documented and secure infrastructure.', statLite:'smooth mode by default', statPreview:'instant preview', statStages:'included in the journey', statLang:'dynamic language', projectsEyebrow:'🚀 Projects', projectsTitle:'Completed projects', projectsText:'SISR-oriented projects: support, systems, networks, monitoring, backup and cybersecurity.', tpEyebrow:'🧪 Practical procedures', tpTitle:'Completed technical procedures', tpText:'Technical procedures are included as evidence: high availability, OpenVPN, Active Directory, Nagios, secure FTP and Linux/MariaDB integration.', resourcesEyebrow:'📄 Resources', resourcesTitle:'Preview & download', resourcesText:'Click a resource: the preview opens directly on the right. Procedures, reports, certificates and annexes remain downloadable.', openPreview:'Open full preview', downloadBtn:'Download', skillsEyebrow:'🧠 Skills', skillsTitle:'Technical skills', skillsText:'Main skills used during training, practical work and internships.', knowHow:'Know-how', domainsTitle:'SISR areas', domainsText:'This section gives a recruiter-friendly view: technologies, methods, documentation and operations.', journeyEyebrow:'🎓 Journey', journeyTitle:'Journey & experience', journeyText:'A clear timeline showing academic progress, internships and developed skills.', contactEyebrow:'📬 Contact', contactTitle:'Contact me', contactText:'A simple area to access the CV and professional links quickly.', contactBio:'BTS SIO SISR student looking for an internship, apprenticeship or junior opportunity in systems/network administration.', professionalDocs:'Professional documents', professionalDocsText:'CV, internship certificates, annexes and technical resources are available in the Resources section.', downloadMyCv:'Download my CV', footerText:'Fast static portfolio compatible with GitHub Pages.', backTop:'Back to top'
       }
     };
     let currentLang = localStorage.getItem('lang') || 'fr';
@@ -425,12 +409,34 @@
       document.getElementById('docFilters').innerHTML = types.map(t=>`<button class="filter ${activeType===t?'active':''}" data-type="${t}">${t}</button>`).join('');
       document.querySelectorAll('.filter').forEach(btn=>btn.onclick=()=>{activeType=btn.dataset.type; renderFilters(); renderDocs();});
     }
+
+    function renderTpShowcase(){
+      const featured = docs.filter(d=>d.featured).slice(0, 6);
+      const box = document.getElementById('tpShowcase');
+      if(!box) return;
+      box.innerHTML = featured.map((d, index)=>`
+        <button class="panel card tp-card reveal" data-file="${d.file}">
+          <div>
+            <div class="tp-icon">${index+1}</div>
+            <span class="tag" style="${colorFor(d.type)}; margin-top:1rem;">${d.type}</span>
+            <h3 style="margin-top:.75rem">${d.title}</h3>
+            <p>${d.desc}</p>
+          </div>
+          <div class="resource-meta"><span class="chip">PDF</span><span class="chip">Procédure</span><span class="chip">Aperçu direct</span></div>
+        </button>`).join('');
+      document.querySelectorAll('.tp-card').forEach(btn=>btn.onclick=()=>{
+        selectedDoc = docs.find(d=>d.file===btn.dataset.file);
+        activeType = 'Tous';
+        renderFilters(); renderDocs(); updateViewer(true);
+        document.getElementById('ressources').scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    }
     function renderDocs(){
       const filtered = activeType==='Tous' ? docs : docs.filter(d=>d.type===activeType);
       document.getElementById('docList').innerHTML = filtered.map((d,i)=>`
         <button class="panel card doc-card ${selectedDoc.file===d.file?'active':''}" data-file="${d.file}">
           <span class="tag" style="${colorFor(d.type)}">${d.type}</span><h3 style="margin-top:.55rem">${d.title}</h3><p>${d.desc}</p>
-          <div class="chips"><span class="chip">${d.kind.toUpperCase()}</span><span class="chip">Aperçu direct</span></div>
+          <div class="chips"><span class="chip">${d.kind.toUpperCase()}</span><span class="chip">Aperçu direct</span>${d.featured?'<span class="chip">Procédure TP</span>':''}</div>
         </button>`).join('');
       document.querySelectorAll('.doc-card').forEach(btn=>btn.onclick=()=>{
         selectedDoc = docs.find(d=>d.file===btn.dataset.file);
@@ -493,7 +499,7 @@
     document.getElementById('previewBtn').onclick=()=>window.open(selectedDoc.file, '_blank', 'noopener');
     const savedTheme = localStorage.getItem('theme');
     document.body.dataset.theme = ['obsidian','ocean','forest','light','redteam'].includes(savedTheme) ? savedTheme : 'obsidian';
-    applyLanguage(); updateClock(); setInterval(updateClock, 1000); renderProjects(); renderFilters(); renderDocs(); updateViewer(true); renderSkills(); renderTimeline(); reveal(); progress(); activeNav();
+    applyLanguage(); updateClock(); setInterval(updateClock, 1000); document.getElementById('resourceCount').textContent = docs.length; renderProjects(); renderTpShowcase(); renderFilters(); renderDocs(); updateViewer(true); renderSkills(); renderTimeline(); reveal(); progress(); activeNav();
     addEventListener('scroll',()=>{ reveal(); progress(); activeNav(); }, {passive:true});
   </script>
 </body>
